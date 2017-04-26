@@ -37,10 +37,13 @@
   </PropertyGroup>
   <ItemGroup />
   <ItemGroup>
+    <Compile Include="src\DrawGame.cs" />
     <Compile Include="src\GameController.cs" />
     <Compile Include="src\GameMain.cs" />
     <Compile Include="src\GameState.cs" />
-    <Compile Include="src\Grid.cs" />
+    <Compile Include="src\Model\Grid.cs" />
+    <Compile Include="src\Snake.cs" />
+    <Compile Include="src\SnakeDirection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SwinGame">
