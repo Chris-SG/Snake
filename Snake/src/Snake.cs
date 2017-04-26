@@ -27,11 +27,14 @@ namespace MyGame
 			set { _length = value; }
 		}
 
-
-
 		public Snake ()
 		{
 
+		}
+
+		public void Spawn ()
+		{
+			
 		}
 	}
 }
