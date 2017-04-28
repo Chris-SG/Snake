@@ -8,6 +8,7 @@ namespace MyGame
 		private SnakeDirection _direction;
 		private int _length;
 
+
 		public int X {
 			get { return _x; }
 			set { _x = value; }
@@ -35,6 +36,29 @@ namespace MyGame
 		public void Spawn ()
 		{
 			
+		}
+
+		public void Movement ()
+		{
+			switch (Direction) {
+			case SnakeDirection.Up:
+				//negative y
+				Y--;
+				break;
+			case SnakeDirection.Right:
+				//positive x
+				X++;
+				break;
+			case SnakeDirection.Down:
+				//positive y
+				Y++;
+				break;
+			case SnakeDirection.Left:
+				//negative x
+				X--;
+				break;
+			}
+
 		}
 	}
 }
