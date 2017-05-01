@@ -7,6 +7,8 @@ namespace MyGame
 		private int _y;
 		private SnakeDirection _direction;
 		private int _length;
+		private int _lives;
+		private Random rand;
 
 
 		public int X {
@@ -28,6 +30,12 @@ namespace MyGame
 			set { _length = value; }
 		}
 
+		public int Lives {
+			get { return _lives; }
+			set { _lives = value; }
+		}
+
+
 		public Snake ()
 		{
 
@@ -35,7 +43,8 @@ namespace MyGame
 
 		public void Spawn ()
 		{
-			
+			X = rand.Next ();
+			Y = rand.Next ();
 		}
 
 		public void Movement ()
@@ -58,7 +67,11 @@ namespace MyGame
 				X--;
 				break;
 			}
+		}
 
+		public void LengthIncrease()
+		{
+			Length = Length + 1;
 		}
 	}
 }
