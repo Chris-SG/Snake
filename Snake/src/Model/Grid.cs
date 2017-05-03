@@ -12,7 +12,7 @@ namespace Snake
     /// A grid is the map in which the Snake game is played.
     /// It can include a Snake and food.
     /// </summary>
-    class Grid
+    public class Grid
     {
         private Point2D _gridSize;
         private char[,] _grid;
