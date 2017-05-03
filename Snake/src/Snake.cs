@@ -10,7 +10,6 @@ namespace MyGame
 		private int _lives;
 		private Random rand;
 
-
 		public int X {
 			get { return _x; }
 			set { _x = value; }
