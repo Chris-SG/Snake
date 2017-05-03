@@ -34,7 +34,6 @@ namespace MyGame
 			set { _lives = value; }
 		}
 
-
 		public Snake ()
 		{
 
