@@ -68,7 +68,7 @@ namespace MyGame
 			}
 		}
 
-		public void LengthIncrease()
+		public void LengthIncrease ()
 		{
 			Length = Length + 1;
 		}
