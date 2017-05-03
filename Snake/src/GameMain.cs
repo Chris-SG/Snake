@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using SwinGameSDK;
 
-namespace MyGame
+namespace Snake
 {
     public class GameMain
     {
@@ -17,7 +17,7 @@ namespace MyGame
             {
                 //Fetch the next batch of UI interaction
                 SwinGame.ProcessEvents();
-
+                
                 //Clear the screen and draw the framerate
                 SwinGame.ClearScreen(Color.White);
                 SwinGame.DrawFramerate(0, 0);
