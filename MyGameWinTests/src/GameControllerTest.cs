@@ -6,10 +6,11 @@ namespace MyGameWinTests.src
     [TestClass]
     public class GameControllerTest
     {
-        Snake s = new Snake();
+        
         [TestMethod]
         public void SnakeTurnRight()
         {
+            SnakeObject s = new SnakeObject();
             Assert.AreSame(x -1, s.RightPress());
         }
 
