@@ -12,8 +12,10 @@ namespace Snake.Tests
     public class GridTests
     {
         [TestMethod()]
-        public void ViewTest()
+        public void GridTest()
         {
+            
+            Grid grid = new Grid();
         }
     }
 }
