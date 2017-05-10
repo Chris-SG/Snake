@@ -10,20 +10,13 @@ namespace Snake
         {
             //Open the game window
             SwinGame.OpenGraphicsWindow("Snake", 800, 600);
-            //SwinGame.ShowSwinGameSplashScreen();
-
+			//SwinGame.ShowSwinGameSplashScreen();
             //Run the game loop
             do
             {
-                //Fetch the next batch of UI interaction
-                SwinGame.ProcessEvents();
-                
-                //Clear the screen and draw the framerate
-                SwinGame.ClearScreen(Color.White);
-                SwinGame.DrawFramerate(0, 0);
-
-                //Draw onto the screen
-                SwinGame.RefreshScreen(60);
+				GameController.HandleUserInput();
+				GameController.DrawGame();
+				
             } while (!SwinGame.WindowCloseRequested());
         }
         

@@ -54,16 +54,12 @@
     <Compile Include="src\Model\GridTests.cs" />
     <Compile Include="src\DrawGameTest.cs" />
     <Compile Include="src\GameControllerTest.cs" />
-    <Compile Include="src\SnakeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Snake\Snake.csproj">
       <Project>{A9DCAC72-BC77-4C33-BE70-BBFD31D7C798}</Project>
       <Name>Snake</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\SnakeTest.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
