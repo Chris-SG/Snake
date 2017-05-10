@@ -1,7 +1,7 @@
 ﻿using System;
-namespace MyGame
+namespace Snake
 {
-	public class Snake
+	public class SnakeObject
 	{
 		private int _x;
 		private int _y;
@@ -22,6 +22,7 @@ namespace MyGame
 
 		public SnakeDirection Direction {
 			get { return _direction; }
+			set { _direction = value; }
 		}
 
 		public int Length {
@@ -36,6 +37,7 @@ namespace MyGame
 
 		public Snake ()
 		{
+			_direction = SnakeDirection.Up;
 
 		}
 
