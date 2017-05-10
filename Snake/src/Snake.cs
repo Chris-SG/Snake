@@ -28,7 +28,8 @@ namespace Snake
 		private void Initialize()
 		{
 			_movementQueue = new List<Tuple<int, int>>();
-			_movementQueue.Add(_snakePos);
+			for (int i = 0; i < 3; i++)
+				_movementQueue.Add(_snakePos);
 			_direction = SnakeDirection.Right;
 			_grow = false;
 			_moveCounter = 30;
