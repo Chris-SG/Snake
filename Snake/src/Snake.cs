@@ -74,28 +74,29 @@ namespace Snake
 			if(--_moveCounter == 0)
 			{
 				_moveCounter = 30;
+			    _direction = _directionToMove;
 
                 //TODO: Maybe set a snake part length 50 to make it move faster
                 switch (Direction)
 				{
 					case SnakeDirection.Up:
 						//negative y
-						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2-1);
 						_movementQueue.Add(_snakePos);
 						break;
 					case SnakeDirection.Right:
 						//positive x
-						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1+1, _snakePos.Item2);
 						_movementQueue.Add(_snakePos);
 						break;
 					case SnakeDirection.Down:
 						//positive y
-						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2+1);
 						_movementQueue.Add(_snakePos);
 						break;
 					case SnakeDirection.Left:
 						//negative x
-						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1-1, _snakePos.Item2);
 						_movementQueue.Add(_snakePos);
 						break;
 				}
@@ -104,7 +105,6 @@ namespace Snake
 				{
 					_movementQueue.RemoveAt(0);
 				}
-				_direction = _directionToMove;
 				_grow = false;
 			}
 		}
