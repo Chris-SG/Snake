@@ -6,12 +6,12 @@ namespace MyGameWinTests.src
     [TestClass]
     public class SnakeTest
     {
-        Snake s = new Snake();
 
         [TestMethod]
         public void SpawnTest()
-        {
-            s.Spawn();
+		{
+			Snake s = new Snake();
+			s.Spawn();
             Assert.AreEqual(2, s.length); // an initial snake equals 2 that includes head and body of the snake
         }
 
