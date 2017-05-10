@@ -10,12 +10,12 @@ namespace Snake
 		private SnakeDirection _direction;
 		private int _lives;
 		private int _moveCounter;
-		private Queue<Tuple<int, int>> _movementQueue;
+		private List<Tuple<int, int>> _movementQueue;
 
 		public SnakeObject(Point2D aGridSize)
 		{
 			_snakePos = new Tuple<int, int>(Convert.ToInt32(Math.Ceiling(aGridSize.X / 2)), Convert.ToInt32(Math.Ceiling(aGridSize.Y / 2)));
-			_movementQueue.Enqueue(_snakePos);
+			_movementQueue.Add(_snakePos);
 			_direction = SnakeDirection.Right;
 		}
 
@@ -36,7 +36,7 @@ namespace Snake
 			get { return _movementQueue.Count; }
 		}
 
-		public Queue<Tuple<int, int>> SnakePos
+		public List<Tuple<int, int>> SnakePos
 		{
 			get { return _movementQueue; }
 		}
@@ -57,24 +57,26 @@ namespace Snake
 					case SnakeDirection.Up:
 						//negative y
 						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2-1);
-						_movementQueue.Enqueue(_snakePos);
+						_movementQueue.Add(_snakePos);
 						break;
 					case SnakeDirection.Right:
 						//positive x
 						_snakePos = new Tuple<int, int>(_snakePos.Item1+1, _snakePos.Item2);
-						_movementQueue.Enqueue(_snakePos);
+						_movementQueue.Add(_snakePos);
 						break;
 					case SnakeDirection.Down:
 						//positive y
 						_snakePos = new Tuple<int, int>(_snakePos.Item1+1, _snakePos.Item2);
-						_movementQueue.Enqueue(_snakePos);
+						_movementQueue.Add(_snakePos);
 						break;
 					case SnakeDirection.Left:
 						//negative x
 						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2 - 1);
-						_movementQueue.Enqueue(_snakePos);
+						_movementQueue.Add(_snakePos);
 						break;
 				}
+
+				_movementQueue.RemoveAt(0);
 			}
 		}
 	}
