@@ -16,6 +16,7 @@ namespace Snake
     {
         private Point2D _gridSize;
         private char[,] _grid;
+		private SnakeObject _snake;
 
         /// <summary>
         /// The constructor can use any given grid size.
@@ -34,6 +35,16 @@ namespace Snake
                 }
             }
         }
+
+		public void CommenceGame()
+		{
+			_snake = new SnakeObject(_gridSize);
+		}
+
+		public SnakeObject SnakeObj
+		{
+			get { return _snake; }
+		}
 
         /// <summary>
         /// Width of the grid.
