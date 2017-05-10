@@ -29,10 +29,9 @@ namespace Snake
 		{
 			_movementQueue = new List<Tuple<int, int>>();
 			_movementQueue.Add(_snakePos);
-			_direction = SnakeDirection.Right;
+            _direction = SnakeDirection.Right;
 			_grow = false;
 			_moveCounter = 30;
-
 		}
 
 		public int X {
@@ -73,26 +72,27 @@ namespace Snake
 			{
 				_moveCounter = 30;
 
+                //TODO: Maybe set a snake part length 50 to make it move faster
 				switch (Direction)
 				{
 					case SnakeDirection.Up:
 						//negative y
-						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2-1);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2-25);
 						_movementQueue.Add(_snakePos);
 						break;
 					case SnakeDirection.Right:
 						//positive x
-						_snakePos = new Tuple<int, int>(_snakePos.Item1+1, _snakePos.Item2);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1+25, _snakePos.Item2);
 						_movementQueue.Add(_snakePos);
 						break;
 					case SnakeDirection.Down:
 						//positive y
-						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2+1);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2+25);
 						_movementQueue.Add(_snakePos);
 						break;
 					case SnakeDirection.Left:
 						//negative x
-						_snakePos = new Tuple<int, int>(_snakePos.Item1-1, _snakePos.Item2);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1-25, _snakePos.Item2);
 						_movementQueue.Add(_snakePos);
 						break;
 				}
