@@ -22,7 +22,7 @@ namespace Snake
         /// The constructor can use any given grid size.
         /// </summary>
         /// <param name="gridSize">The size of the grid.</param>
-        Grid(Point2D gridSize)
+        public Grid(Point2D gridSize)
         {
             _gridSize = gridSize;
             _grid = new char[Width, Height];
