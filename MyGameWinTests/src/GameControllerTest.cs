@@ -1,12 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MyGameWinTests.src
+namespace Snake.src
 {
     [TestClass]
     public class GameControllerTest
     {
-        Snake s = new Snake();
         [TestMethod]
         public void SnakeTurnRight()
         {
