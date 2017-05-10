@@ -19,6 +19,14 @@ namespace Snake
             }
 
 			Assert.AreEqual(2, snake.Length);
+        }
+
+        [TestMethod]
+        public void MovementTest()
+        {
+            SnakeObject snake = new SnakeObject(6, 6);
+            
+            Assert.IsTrue(snake.X == 3 && snake.Y == 3);
 
         }
     }
