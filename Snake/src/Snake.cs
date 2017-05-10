@@ -28,8 +28,14 @@ namespace Snake
 		private void Initialize()
 		{
 			_movementQueue = new List<Tuple<int, int>>();
+<<<<<<< HEAD
 			_movementQueue.Add(_snakePos);
             _direction = SnakeDirection.Right;
+=======
+			for (int i = 0; i < 3; i++)
+				_movementQueue.Add(_snakePos);
+			_direction = SnakeDirection.Right;
+>>>>>>> refs/remotes/origin/master
 			_grow = false;
 			_moveCounter = 30;
 		}
