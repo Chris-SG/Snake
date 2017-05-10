@@ -35,7 +35,7 @@ namespace Snake
 			set { _lives = value; }
 		}
 
-		public Snake ()
+		public SnakeObject ()
 		{
 			_direction = SnakeDirection.Up;
 
