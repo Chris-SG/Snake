@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SwinGameSDK;
 
 namespace Snake
 {
-    public class DrawGame
-    {
-    }
+	class Food : Item
+	{
+		public Food(int x, int y) : base(x, y)
+		{
+
+		}
+	}
 }

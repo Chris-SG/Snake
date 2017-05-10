@@ -11,16 +11,17 @@ namespace Snake
     {
         private static GameState _state;
 
-		private static SnakeObject _snake;
+		private static Grid _grid;
 
 		static GameController()
 		{
-			_snake = new SnakeObject();
+			Tuple<int, int> lGrid = new Tuple<int, int>(12, 12);
+			_grid = new Grid(lGrid);
 		}
 
 		public static void StartGame()
 		{
-			_snake.Spawn();
+			_grid.CommenceGame();
 		}
 
 		public static void HandleUserInput()

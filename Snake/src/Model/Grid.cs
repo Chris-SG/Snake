@@ -14,14 +14,16 @@ namespace Snake
     /// </summary>
     public class Grid
     {
-        private Point2D _gridSize;
+        private Tuple<int,int> _gridSize;
         private char[,] _grid;
+		private List<Item> _items;
+		private SnakeObject _snake;
 
         /// <summary>
         /// The constructor can use any given grid size.
         /// </summary>
         /// <param name="gridSize">The size of the grid.</param>
-        Grid(Point2D gridSize)
+        public Grid(Tuple<int,int> gridSize)
         {
             _gridSize = gridSize;
             _grid = new char[Width, Height];
@@ -35,6 +37,16 @@ namespace Snake
             }
         }
 
+		public void CommenceGame()
+		{
+			_snake = new SnakeObject(_gridSize);
+		}
+
+		public SnakeObject SnakeObj
+		{
+			get { return _snake; }
+		}
+
         /// <summary>
         /// Width of the grid.
         /// </summary>
@@ -42,7 +54,7 @@ namespace Snake
         {
             get
             {
-                return Convert.ToInt32(_gridSize.X);
+                return Convert.ToInt32(_gridSize.Item1);
             }
         }
         
@@ -53,7 +65,7 @@ namespace Snake
         {
             get
             {
-                return Convert.ToInt32(_gridSize.Y);
+                return Convert.ToInt32(_gridSize.Item2);
             }
         }
 
@@ -62,9 +74,9 @@ namespace Snake
         /// </summary>
         /// <param name="pos">Position to investigate.</param>
         /// <returns>Value from given position.</returns>
-        public char View(Point2D pos)
+        public char View(Tuple<int,int> pos)
         {
-            return _grid[Convert.ToInt32(pos.X), Convert.ToInt32(pos.Y)];
+			return _grid[pos.Item1, pos.Item2];
         }
         
     }

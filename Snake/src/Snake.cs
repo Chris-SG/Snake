@@ -1,23 +1,51 @@
 ﻿using System;
+using System.Collections.Generic;
+using SwinGameSDK;
+
 namespace Snake
 {
 	public class SnakeObject
 	{
-		private int _x;
-		private int _y;
+		private Tuple<int, int> _snakePos;
 		private SnakeDirection _direction;
-		private int _length;
 		private int _lives;
-		private Random rand;
+		private int _moveCounter;
+		private bool _grow;
+		private List<Tuple<int, int>> _movementQueue;
+
+		public SnakeObject(Tuple<int,int> aGridSize)
+		{
+			_snakePos = new Tuple<int, int>((aGridSize.Item1 / 2), (aGridSize.Item2 / 2));
+			Initialize();
+		}
+		
+		public SnakeObject(int x, int y)
+		{
+			_snakePos = new Tuple<int, int>((x/2), (y/2));
+			Initialize();
+		}
+
+		private void Initialize()
+		{
+			_movementQueue = new List<Tuple<int, int>>();
+			_movementQueue.Add(_snakePos);
+			_direction = SnakeDirection.Right;
+			_grow = false;
+			_moveCounter = 30;
+
+		}
 
 		public int X {
-			get { return _x; }
-			set { _x = value; }
+			get { return _snakePos.Item1; }
+		}
+
+		public bool Grow
+		{
+			set { _grow = value; }
 		}
 
 		public int Y {
-			get { return _y; }
-			set { _y = value; }
+			get { return _snakePos.Item2; ; }
 		}
 
 		public SnakeDirection Direction {
@@ -26,8 +54,12 @@ namespace Snake
 		}
 
 		public int Length {
-			get { return _length; }
-			set { _length = value; }
+			get { return _movementQueue.Count; }
+		}
+
+		public List<Tuple<int, int>> SnakePos
+		{
+			get { return _movementQueue; }
 		}
 
 		public int Lives {
@@ -35,43 +67,42 @@ namespace Snake
 			set { _lives = value; }
 		}
 
-		public SnakeObject ()
-		{
-			_direction = SnakeDirection.Up;
-
-		}
-
-		public void Spawn ()
-		{
-			X = rand.Next ();
-			Y = rand.Next ();
-		}
-
 		public void Movement ()
 		{
-			switch (Direction) {
-			case SnakeDirection.Up:
-				//negative y
-				Y--;
-				break;
-			case SnakeDirection.Right:
-				//positive x
-				X++;
-				break;
-			case SnakeDirection.Down:
-				//positive y
-				Y++;
-				break;
-			case SnakeDirection.Left:
-				//negative x
-				X--;
-				break;
-			}
-		}
+			if(--_moveCounter == 0)
+			{
+				_moveCounter = 30;
 
-		public void LengthIncrease ()
-		{
-			Length = Length + 1;
+				switch (Direction)
+				{
+					case SnakeDirection.Up:
+						//negative y
+						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2-1);
+						_movementQueue.Add(_snakePos);
+						break;
+					case SnakeDirection.Right:
+						//positive x
+						_snakePos = new Tuple<int, int>(_snakePos.Item1+1, _snakePos.Item2);
+						_movementQueue.Add(_snakePos);
+						break;
+					case SnakeDirection.Down:
+						//positive y
+						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2+1);
+						_movementQueue.Add(_snakePos);
+						break;
+					case SnakeDirection.Left:
+						//negative x
+						_snakePos = new Tuple<int, int>(_snakePos.Item1-1, _snakePos.Item2);
+						_movementQueue.Add(_snakePos);
+						break;
+				}
+
+				if (_grow != true)
+				{
+					_movementQueue.RemoveAt(0);
+				}
+				_grow = false;
+			}
 		}
 	}
 }
