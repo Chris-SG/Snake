@@ -22,13 +22,22 @@ namespace Snake
 			_grow = false;
 		}
 
+		public SnakeObject(int x, int y)
+		{
+			_snakePos = new Tuple<int, int>(x, y);
+			_movementQueue = new List<Tuple<int, int>>();
+			_movementQueue.Add(_snakePos);
+			_direction = SnakeDirection.Right;
+			_grow = false;
+		}
+
 		public int X {
 			get { return _snakePos.Item1; }
 		}
 
 		public bool Grow
 		{
-			set { _grow = true; }
+			set { _grow = value; }
 		}
 
 		public int Y {
