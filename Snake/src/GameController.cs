@@ -15,10 +15,8 @@ namespace Snake
 
 		static GameController()
 		{
-			Point2D lPt = new Point2D();
-			lPt.X = 12;
-			lPt.Y = 12;
-			_grid = new Grid(lPt);
+			Tuple<int, int> lGrid = new Tuple<int, int>(12, 12);
+			_grid = new Grid(lGrid);
 		}
 
 		public static void StartGame()
