@@ -7,7 +7,7 @@ namespace Snake
 	public class SnakeObject
 	{
 		private Tuple<int, int> _snakePos;
-		private SnakeDirection _direction;
+		private SnakeDirection _direction, _directionToMove;
 		private int _lives;
 		private int _moveCounter;
 		private bool _grow;
@@ -30,7 +30,8 @@ namespace Snake
 			_movementQueue = new List<Tuple<int, int>>();
 			for (int i = 0; i < 3; i++)
 				_movementQueue.Add(_snakePos);
-			_direction = SnakeDirection.Right;
+			_directionToMove = SnakeDirection.Right;
+			_direction = _directionToMove;
 			_grow = false;
 			_moveCounter = 30;
 
@@ -51,7 +52,7 @@ namespace Snake
 
 		public SnakeDirection Direction {
 			get { return _direction; }
-			set { _direction = value; }
+			set { _directionToMove = value; }
 		}
 
 		public int Length {
@@ -102,6 +103,7 @@ namespace Snake
 				{
 					_movementQueue.RemoveAt(0);
 				}
+				_direction = _directionToMove;
 				_grow = false;
 			}
 		}
