@@ -10,6 +10,7 @@ namespace Snake
 		private SnakeDirection _direction;
 		private int _lives;
 		private int _moveCounter;
+		private bool _grow;
 		private List<Tuple<int, int>> _movementQueue;
 
 		public SnakeObject(Point2D aGridSize)
@@ -18,10 +19,16 @@ namespace Snake
 			_movementQueue = new List<Tuple<int, int>>();
 			_movementQueue.Add(_snakePos);
 			_direction = SnakeDirection.Right;
+			_grow = false;
 		}
 
 		public int X {
 			get { return _snakePos.Item1; }
+		}
+
+		public bool Grow
+		{
+			set { _grow = true; }
 		}
 
 		public int Y {
@@ -77,7 +84,11 @@ namespace Snake
 						break;
 				}
 
-				_movementQueue.RemoveAt(0);
+				if (_grow != true)
+				{
+					_movementQueue.RemoveAt(0);
+				}
+				_grow = false;
 			}
 		}
 	}
