@@ -3,9 +3,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug-Windows</Configuration>
     <ProjectGuid>{CE8F8629-91D0-46F9-A2BE-ED2E10B81A99}</ProjectGuid>
-    <RootNamespace>MyGame</RootNamespace>
+    <RootNamespace>Snake</RootNamespace>
     <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
-    <AssemblyName>MyGame</AssemblyName>
+    <AssemblyName>Snake</AssemblyName>
     <SuppressXamMacUpsell>True</SuppressXamMacUpsell>
     <SuppressXamMacMigration>True</SuppressXamMacMigration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -40,7 +40,10 @@
     <Compile Include="src\GameController.cs" />
     <Compile Include="src\GameMain.cs" />
     <Compile Include="src\GameState.cs" />
+    <Compile Include="src\Model\BonusFood.cs" />
+    <Compile Include="src\Model\Food.cs" />
     <Compile Include="src\Model\Grid.cs" />
+    <Compile Include="src\Model\Item.cs" />
     <Compile Include="src\Snake.cs" />
     <Compile Include="src\SnakeDirection.cs" />
   </ItemGroup>
@@ -49,9 +52,6 @@
       <HintPath>lib\SwinGame.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="nunit.framework">
-      <HintPath>packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\**\*.*">

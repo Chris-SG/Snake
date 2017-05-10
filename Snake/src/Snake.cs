@@ -13,9 +13,9 @@ namespace Snake
 		private bool _grow;
 		private List<Tuple<int, int>> _movementQueue;
 
-		public SnakeObject(Point2D aGridSize)
+		public SnakeObject(Tuple<int,int> aGridSize)
 		{
-			_snakePos = new Tuple<int, int>(Convert.ToInt32(Math.Floor(aGridSize.X / 2)), Convert.ToInt32(Math.Floor(aGridSize.Y / 2)));
+			_snakePos = new Tuple<int, int>((aGridSize.Item1 / 2), (aGridSize.Item2 / 2));
 			Initialize();
 		}
 		
