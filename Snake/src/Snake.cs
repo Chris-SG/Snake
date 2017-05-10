@@ -7,7 +7,7 @@ namespace Snake
 	public class SnakeObject
 	{
 		private Tuple<int, int> _snakePos;
-		private SnakeDirection _direction;
+		private SnakeDirection _direction, _directionToDo;
 		private int _lives;
 		private int _moveCounter;
 		private bool _grow;
@@ -28,15 +28,12 @@ namespace Snake
 		private void Initialize()
 		{
 			_movementQueue = new List<Tuple<int, int>>();
-<<<<<<< HEAD
-			_movementQueue.Add(_snakePos);
-            _direction = SnakeDirection.Right;
-=======
+
 			for (int i = 0; i < 3; i++)
 				_movementQueue.Add(_snakePos);
 			_direction = SnakeDirection.Right;
->>>>>>> refs/remotes/origin/master
-			_grow = false;
+		    _directionToDo = _direction;
+            _grow = false;
 			_moveCounter = 30;
 		}
 
@@ -55,7 +52,7 @@ namespace Snake
 
 		public SnakeDirection Direction {
 			get { return _direction; }
-			set { _direction = value; }
+			set { _directionToDo = value; }
 		}
 
 		public int Length {
@@ -78,27 +75,29 @@ namespace Snake
 			{
 				_moveCounter = 30;
 
+			    _direction = _directionToDo;
+
                 //TODO: Maybe set a snake part length 50 to make it move faster
-				switch (Direction)
+                switch (Direction)
 				{
 					case SnakeDirection.Up:
 						//negative y
-						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2-25);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2);
 						_movementQueue.Add(_snakePos);
 						break;
 					case SnakeDirection.Right:
 						//positive x
-						_snakePos = new Tuple<int, int>(_snakePos.Item1+25, _snakePos.Item2);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2);
 						_movementQueue.Add(_snakePos);
 						break;
 					case SnakeDirection.Down:
 						//positive y
-						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2+25);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2);
 						_movementQueue.Add(_snakePos);
 						break;
 					case SnakeDirection.Left:
 						//negative x
-						_snakePos = new Tuple<int, int>(_snakePos.Item1-25, _snakePos.Item2);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2);
 						_movementQueue.Add(_snakePos);
 						break;
 				}
@@ -107,7 +106,7 @@ namespace Snake
 				{
 					_movementQueue.RemoveAt(0);
 				}
-				_grow = false;
+                _grow = false;
 			}
 		}
 	}
