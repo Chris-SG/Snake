@@ -15,6 +15,7 @@ namespace Snake
 		public SnakeObject(Point2D aGridSize)
 		{
 			_snakePos = new Tuple<int, int>(Convert.ToInt32(Math.Ceiling(aGridSize.X / 2)), Convert.ToInt32(Math.Ceiling(aGridSize.Y / 2)));
+			_movementQueue = new List<Tuple<int, int>>();
 			_movementQueue.Add(_snakePos);
 			_direction = SnakeDirection.Right;
 		}
