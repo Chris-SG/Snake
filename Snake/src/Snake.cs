@@ -16,21 +16,23 @@ namespace Snake
 		public SnakeObject(Point2D aGridSize)
 		{
 			_snakePos = new Tuple<int, int>(Convert.ToInt32(Math.Floor(aGridSize.X / 2)), Convert.ToInt32(Math.Floor(aGridSize.Y / 2)));
-			_movementQueue = new List<Tuple<int, int>>();
-			_movementQueue.Add(_snakePos);
-			_direction = SnakeDirection.Right;
-			_grow = false;
-			_moveCounter = 30;
+			Initialize();
 		}
 
 		public SnakeObject(int x, int y)
 		{
 			_snakePos = new Tuple<int, int>((x/2), (y/2));
+			Initialize();
+		}
+
+		private void Initialize()
+		{
 			_movementQueue = new List<Tuple<int, int>>();
 			_movementQueue.Add(_snakePos);
 			_direction = SnakeDirection.Right;
 			_grow = false;
 			_moveCounter = 30;
+
 		}
 
 		public int X {
