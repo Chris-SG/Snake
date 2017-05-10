@@ -54,7 +54,6 @@ namespace Snake
             snake.Direction = SnakeDirection.Up;
 
             Assert.AreEqual(SnakeDirection.Up, snake.Direction);
-
         }
 
         [TestMethod]
