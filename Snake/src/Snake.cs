@@ -18,7 +18,7 @@ namespace Snake
 			_snakePos = new Tuple<int, int>(Convert.ToInt32(Math.Floor(aGridSize.X / 2)), Convert.ToInt32(Math.Floor(aGridSize.Y / 2)));
 			Initialize();
 		}
-
+		
 		public SnakeObject(int x, int y)
 		{
 			_snakePos = new Tuple<int, int>((x/2), (y/2));
@@ -87,12 +87,12 @@ namespace Snake
 						break;
 					case SnakeDirection.Down:
 						//positive y
-						_snakePos = new Tuple<int, int>(_snakePos.Item1+1, _snakePos.Item2);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2+1);
 						_movementQueue.Add(_snakePos);
 						break;
 					case SnakeDirection.Left:
 						//negative x
-						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2 - 1);
+						_snakePos = new Tuple<int, int>(_snakePos.Item1-1, _snakePos.Item2);
 						_movementQueue.Add(_snakePos);
 						break;
 				}
