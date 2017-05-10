@@ -20,6 +20,7 @@ namespace Snake
 			_movementQueue.Add(_snakePos);
 			_direction = SnakeDirection.Right;
 			_grow = false;
+			_moveCounter = 30;
 		}
 
 		public SnakeObject(int x, int y)
@@ -29,6 +30,7 @@ namespace Snake
 			_movementQueue.Add(_snakePos);
 			_direction = SnakeDirection.Right;
 			_grow = false;
+			_moveCounter = 30;
 		}
 
 		public int X {

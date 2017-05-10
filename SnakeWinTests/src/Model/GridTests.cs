@@ -14,7 +14,6 @@ namespace Snake.Tests
         [TestMethod()]
         public void ViewTest()
         {
-            Assert.Fail();
         }
     }
 }

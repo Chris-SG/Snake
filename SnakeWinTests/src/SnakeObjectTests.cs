@@ -18,7 +18,7 @@ namespace Snake
                 snake.Movement();
             }
 
-            Assert.AreEqual(2, snake.Length);
+			Assert.AreEqual(2, snake.Length);
 
         }
     }
