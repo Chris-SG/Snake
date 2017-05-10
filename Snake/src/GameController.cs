@@ -51,8 +51,10 @@ namespace Snake
         {
             foreach (var parts in s.SnakePos)
             {
-                SwinGame.FillRectangle(Color.Coral, s.X,  s.Y,
+                SwinGame.FillRectangle(Color.Coral, parts.Item1* SNAKE_PART_LENGTH, parts.Item2* SNAKE_PART_LENGTH,
                                                     SNAKE_PART_LENGTH, SNAKE_PART_LENGTH);
+                SwinGame.DrawRectangle(Color.BlanchedAlmond, parts.Item1 * SNAKE_PART_LENGTH, parts.Item2 * SNAKE_PART_LENGTH,
+                    SNAKE_PART_LENGTH, SNAKE_PART_LENGTH);
             }
         }
 
