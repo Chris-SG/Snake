@@ -52,6 +52,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Model\GridTests.cs" />
+    <Compile Include="src\DrawGameTest.cs" />
+    <Compile Include="src\GameControllerTest.cs" />
+    <Compile Include="src\SnakeTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Snake\MyGameWin.csproj">
