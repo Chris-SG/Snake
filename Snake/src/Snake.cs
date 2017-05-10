@@ -37,7 +37,7 @@ namespace Snake
 
 		public bool Grow
 		{
-			set { _grow = true; }
+			set { _grow = value; }
 		}
 
 		public int Y {
