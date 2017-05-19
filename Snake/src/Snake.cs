@@ -40,7 +40,9 @@ namespace Snake
 			_directionToMove = SnakeDirection.Right;
 			_direction = _directionToMove;
 			_grow = false;
+
 			_moveCounter = _speed;
+
 			_isSnakeNew = true;
 		}
 
