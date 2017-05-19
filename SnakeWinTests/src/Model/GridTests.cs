@@ -43,7 +43,9 @@ namespace Snake.Tests
         {
             Grid grid = new Grid(new Tuple<int, int>(10, 10));
             grid.CommenceGame();
-            //need to know the functions to deploy food
+
+            Assert.IsTrue(grid.Items.Count > 0, "No items created");
+        
         }
 
         [TestMethod()]
@@ -51,8 +53,14 @@ namespace Snake.Tests
         {
             Grid grid = new Grid(new Tuple<int, int>(10, 10));
             grid.CommenceGame();
-            //need to know the functions to deploy food
-            //check if there is a clash of items
+
+            foreach (Item lItem in grid.Items)
+            {
+                Assert.IsFalse(lItem.X == grid.SnakeObj.X && lItem.Y == grid.SnakeObj.Y, 
+                    "Item placed on top of the snake");
+            
+            }
+            
         }
 
     }
