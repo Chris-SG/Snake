@@ -35,7 +35,7 @@ namespace Snake
 			_directionToMove = SnakeDirection.Right;
 			_direction = _directionToMove;
 			_grow = false;
-			_moveCounter = 30;
+			_moveCounter = 15;
 			_isSnakeNew = true;
 		}
 

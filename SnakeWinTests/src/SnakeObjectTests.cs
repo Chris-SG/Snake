@@ -30,13 +30,13 @@ namespace Snake
         }
 
         [TestMethod]
-        public void MovmentTest()
+        public void MovementTest()
         {
             SnakeObject snake = new SnakeObject(6, 6);
             snake.Direction = SnakeDirection.Down;
 
 
-            for(int i = 0; i < 30; i++)
+            for(int i = 0; i < 15; i++)
                 snake.Movement();
 
             Assert.IsTrue(snake.X == 3 && snake.Y == 4);
@@ -59,14 +59,13 @@ namespace Snake
             SnakeObject snake = new SnakeObject(6, 6);
             snake.Direction = SnakeDirection.Down;
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 15; i++)
                 snake.Movement();
 
             Assert.IsTrue(snake.X == 3 && snake.Y == 4);
-
             snake.Direction = SnakeDirection.Left;
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 15; i++)
                 snake.Movement();
 
             Assert.IsTrue(snake.X == 2 && snake.Y == 4);
