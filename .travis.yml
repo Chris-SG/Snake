@@ -1,2 +1,6 @@
 language: csharp
 solution: Snake/Snake.sln
+
+install:
+  - npm install
+  - npm run vscode:prepublish
