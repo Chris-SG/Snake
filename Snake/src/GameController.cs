@@ -45,6 +45,11 @@ namespace Snake
                     _grid.SnakeObj.Direction = SnakeDirection.Up;
             }
             _grid.SnakeObj.Movement();
+
+			 if(_grid.CheckCollisions())
+			{
+				//you die
+			}
         }
 
         public static void DrawSnake(SnakeObject s)
