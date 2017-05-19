@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Snake
 {
-	class Item
+	public class Item
 	{
 		Tuple<int, int> _position;
 

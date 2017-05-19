@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Snake
 {
-	class BonusFood : Item
+	public class BonusFood : Item
 	{
 		private int _lifetime;
 
