@@ -44,17 +44,14 @@ namespace Snake
         }
 
         [TestMethod]
-        public void DirectionTest()
+        public void DefaultDirectionTest()
         {
             SnakeObject snake = new SnakeObject(6, 6);
-            snake.Direction = SnakeDirection.Left;
-
-            Assert.AreEqual(SnakeDirection.Left, snake.Direction);
-
-            snake.Direction = SnakeDirection.Up;
-
-            Assert.AreEqual(SnakeDirection.Up, snake.Direction);
+            
+            Assert.AreEqual(SnakeDirection.Right, snake.Direction);
+            
         }
+
 
         [TestMethod]
         public void ExtendedMovementTest()
