@@ -40,11 +40,9 @@ namespace Snake
 			_directionToMove = SnakeDirection.Right;
 			_direction = _directionToMove;
 			_grow = false;
-<<<<<<< HEAD
+
 			_moveCounter = _speed;
-=======
-			_moveCounter = 15;
->>>>>>> controller-unit-tests
+
 			_isSnakeNew = true;
 		}
 
