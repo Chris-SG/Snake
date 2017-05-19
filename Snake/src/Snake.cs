@@ -13,16 +13,19 @@ namespace Snake
 		private bool _grow;
 		private List<Tuple<int, int>> _movementQueue;
 		private bool _isSnakeNew;
+		private int _speed;
 
-		public SnakeObject(Tuple<int,int> aGridSize)
+		public SnakeObject(Tuple<int,int> aGridSize, int aSpeed = 15)
 		{
 			_snakePos = new Tuple<int, int>((aGridSize.Item1 / 2), (aGridSize.Item2 / 2));
+			_speed = aSpeed;
 			Initialize();
 		}
 		
-		public SnakeObject(int x, int y)
+		public SnakeObject(int x, int y, int aSpeed = 15)
 		{
 			_snakePos = new Tuple<int, int>((x/2), (y/2));
+			_speed = aSpeed;
 			Initialize();
 		}
 
@@ -31,11 +34,13 @@ namespace Snake
 			_movementQueue = new List<Tuple<int, int>>();
 
 			for (int i = 0; i < 3; i++)
+			{
 				_movementQueue.Add(_snakePos);
+			}
 			_directionToMove = SnakeDirection.Right;
 			_direction = _directionToMove;
 			_grow = false;
-			_moveCounter = 30;
+			_moveCounter = _speed;
 			_isSnakeNew = true;
 		}
 
@@ -81,7 +86,7 @@ namespace Snake
 			if(--_moveCounter == 0)
 			{
 				_isSnakeNew = false;
-				_moveCounter = 15;
+				_moveCounter = _speed;
 			    _direction = _directionToMove;
 
                 //TODO: Maybe set a snake part length 50 to make it move faster

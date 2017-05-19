@@ -125,9 +125,9 @@ namespace Snake
 			}
 		}
 
-		public void CommenceGame()
+		public void CommenceGame(int aSpeed = 15)
 		{
-			_snake = new SnakeObject(_gridSize);
+			_snake = new SnakeObject(_gridSize, aSpeed);
 			CreateNewItem();
 		}
 

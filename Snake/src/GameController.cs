@@ -18,7 +18,7 @@ namespace Snake
 
         public static void StartGame()
         {
-            _grid.CommenceGame();
+            _grid.CommenceGame(5);
         }
 
         public static void HandleUserInput()
