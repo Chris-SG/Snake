@@ -164,6 +164,7 @@ namespace Snake
         {
             SnakeObject snake = new SnakeObject(6, 6);
 
+<<<<<<< HEAD
             snake.Direction = SnakeDirection.Up;
             for (int i = 0; i < 15; i++)
                 snake.Movement();
@@ -172,6 +173,11 @@ namespace Snake
             
             Assert.AreNotEqual(SnakeDirection.Down, snake.Direction, "Snake accidentally turned into itself");
 
+=======
+            //snake.Direction = SnakeDirection.Up;
+
+            //Assert.AreEqual(SnakeDirection.Up, snake.Direction);
+>>>>>>> Tests
         }
 
         [TestMethod]
