@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SwinGameSDK;
 
 namespace Snake
@@ -6,19 +7,22 @@ namespace Snake
     public static class GameController
     {
         private static readonly int SNAKE_PART_LENGTH = 25;
-        private static GameState _state;
+        private static Stack<GameState> _state;
 
-        private static readonly Grid _grid;
+        private static Grid _grid;
 
         static GameController()
         {
-            var lGrid = new Tuple<int, int>(12, 12);
-            _grid = new Grid(lGrid);
+			_state = new Stack<GameState>();
+			_state.Push(GameState.MainMenu);
         }
 
         public static void StartGame()
-        {
-            _grid.CommenceGame(5);
+		{
+			_state.Push(GameState.InGame);
+			var lGrid = new Tuple<int, int>(12, 12);
+			_grid = new Grid(lGrid);
+			_grid.CommenceGame(5);
         }
 
         public static void HandleUserInput()
@@ -56,7 +60,7 @@ namespace Snake
         {
             foreach (var parts in s.SnakePos)
             {
-                SwinGame.FillRectangle(Color.Coral, parts.Item1* SNAKE_PART_LENGTH, parts.Item2* SNAKE_PART_LENGTH, SNAKE_PART_LENGTH, SNAKE_PART_LENGTH);
+                SwinGame.FillRectangle(Color.Coral, parts.Item1 * SNAKE_PART_LENGTH, parts.Item2* SNAKE_PART_LENGTH, SNAKE_PART_LENGTH, SNAKE_PART_LENGTH);
                 SwinGame.DrawRectangle(Color.BlanchedAlmond, parts.Item1 * SNAKE_PART_LENGTH, parts.Item2 * SNAKE_PART_LENGTH, SNAKE_PART_LENGTH, SNAKE_PART_LENGTH);
             }
         }
@@ -65,10 +69,22 @@ namespace Snake
         {
             SwinGame.ClearScreen(Color.White);
 
-            DrawSnake(_grid.SnakeObj);
+			switch(_state.Peek())
+			{
+				case GameState.MainMenu:
+					break;
+				case GameState.InGame:
+					DrawSnake(_grid.SnakeObj);
+					break;
+				case GameState.GameOver:
+					break;
+				case GameState.Quitting:
+					break;
+
+			}
+
 
             SwinGame.DrawFramerate(0, 0);
-
             SwinGame.RefreshScreen(60);
         }
     }
