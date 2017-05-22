@@ -14,7 +14,7 @@ namespace Snake.Tests
         [TestMethod()]
         public void FoodExist()
         {
-            //items & foods are currently unaccesible
+            
         }
     }
 }
