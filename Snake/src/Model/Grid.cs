@@ -105,7 +105,7 @@ namespace Snake
 			}
 			foreach (Tuple<int, int> lT in _snake.SnakePos)
 			{
-				lGridArray[(lT.Item2) * 8 + lT.Item1] = -1;
+				lGridArray[(lT.Item2) * Width + lT.Item1] = -1;
 			}
 			Random lRand = new Random();
 			for (int i = 0; i < lGridArray.Length; i++)
@@ -119,7 +119,7 @@ namespace Snake
 			{
 				if (lGridArray[i] != -1)
 				{
-					_items.Add(new Food(lGridArray[i] % 8, (lGridArray[i] - lGridArray[i] % 8) / 8));
+					_items.Add(new Food(lGridArray[i] % Width, (lGridArray[i] - (lGridArray[i] % Width)) / Height));
 					break;
 				}
 			}

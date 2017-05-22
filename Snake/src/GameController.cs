@@ -22,7 +22,7 @@ namespace Snake
         public static void StartGame()
 		{
 			_state.Push(GameState.InGame);
-			var lGrid = new Tuple<int, int>(12, 12);
+			var lGrid = new Tuple<int, int>(4, 12);
 			_grid = new Grid(lGrid);
 			_grid.CommenceGame(15);
         }
