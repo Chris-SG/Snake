@@ -9,6 +9,7 @@ namespace Snake.src
         [TestMethod]
         public void SnakeTurnRight()
         {
+          
         }
 
         [TestMethod]
