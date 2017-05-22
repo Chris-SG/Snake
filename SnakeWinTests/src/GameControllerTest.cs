@@ -10,19 +10,9 @@ namespace Snake
         [TestMethod]
         public void StartGameTest()
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            Grid grid = new Grid(new Tuple<int, int>(10, 10));
-            grid.CommenceGame();
-=======
-          
-=======
+
             Grid grid = new Grid(new Tuple<int, int>(10, 10));
             SnakeObject snake = new SnakeObject(5, 5);
-
->>>>>>> Tests
-        }
->>>>>>> Tests
 
             Assert.IsNotNull(grid.SnakeObj, "Where's the snake?");
             Assert.IsTrue(grid.Items.Count > 0, "No items here");
