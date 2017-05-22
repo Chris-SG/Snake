@@ -28,32 +28,46 @@ namespace Snake
         public static void HandleUserInput()
         {
             SwinGame.ProcessEvents();
-            if (SwinGame.KeyDown(KeyCode.DownKey))
-            {
-                if (_grid.SnakeObj.Direction != SnakeDirection.Up)
-                    _grid.SnakeObj.Direction = SnakeDirection.Down;
-            }
-            if (SwinGame.KeyDown(KeyCode.RightKey))
-            {
-                if (_grid.SnakeObj.Direction != SnakeDirection.Left)
-                    _grid.SnakeObj.Direction = SnakeDirection.Right;
-            }
-            if (SwinGame.KeyTyped(KeyCode.LeftKey))
-            {
-                if (_grid.SnakeObj.Direction != SnakeDirection.Right)
-                    _grid.SnakeObj.Direction = SnakeDirection.Left;
-            }
-            if (SwinGame.KeyTyped(KeyCode.UpKey))
-            {
-                if (_grid.SnakeObj.Direction != SnakeDirection.Down)
-                    _grid.SnakeObj.Direction = SnakeDirection.Up;
-            }
-            _grid.SnakeObj.Movement();
-
-			 if(_grid.CheckCollisions())
+			switch (_state.Peek())
 			{
-				//you die
+				case GameState.MainMenu:
+					StartGame();
+					break;
+				case GameState.InGame:
+					if (SwinGame.KeyDown(KeyCode.DownKey))
+					{
+						if (_grid.SnakeObj.Direction != SnakeDirection.Up)
+							_grid.SnakeObj.Direction = SnakeDirection.Down;
+					}
+					if (SwinGame.KeyDown(KeyCode.RightKey))
+					{
+						if (_grid.SnakeObj.Direction != SnakeDirection.Left)
+							_grid.SnakeObj.Direction = SnakeDirection.Right;
+					}
+					if (SwinGame.KeyTyped(KeyCode.LeftKey))
+					{
+						if (_grid.SnakeObj.Direction != SnakeDirection.Right)
+							_grid.SnakeObj.Direction = SnakeDirection.Left;
+					}
+					if (SwinGame.KeyTyped(KeyCode.UpKey))
+					{
+						if (_grid.SnakeObj.Direction != SnakeDirection.Down)
+							_grid.SnakeObj.Direction = SnakeDirection.Up;
+					}
+					_grid.SnakeObj.Movement();
+
+					if (_grid.CheckCollisions())
+					{
+						_state.Pop();
+					}
+					break;
+				case GameState.GameOver:
+					break;
+				case GameState.Quitting:
+					break;
 			}
+
+
         }
 
         public static void DrawSnake(SnakeObject s)
