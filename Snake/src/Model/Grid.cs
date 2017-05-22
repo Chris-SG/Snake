@@ -119,7 +119,7 @@ namespace Snake
 			{
 				if (lGridArray[i] != -1)
 				{
-					_items.Add(new Food(i % 8, (i - i % 8) / 8));
+					_items.Add(new Food(lGridArray[i] % 8, (lGridArray[i] - lGridArray[i] % 8) / 8));
 					break;
 				}
 			}

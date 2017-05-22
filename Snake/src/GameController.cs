@@ -24,7 +24,7 @@ namespace Snake
 			_state.Push(GameState.InGame);
 			var lGrid = new Tuple<int, int>(12, 12);
 			_grid = new Grid(lGrid);
-			_grid.CommenceGame(5);
+			_grid.CommenceGame(15);
         }
 
         public static void HandleUserInput()
