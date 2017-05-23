@@ -15,9 +15,11 @@ namespace Snake
     public class Grid
     {
         private Tuple<int,int> _gridSize;
-        private char[,] _grid;
+		private static Random lRand = new Random();
+		private char[,] _grid;
 		private List<Item> _items;
 		private SnakeObject _snake;
+		private int _score;
 
         /// <summary>
         /// The constructor can use any given grid size.
@@ -86,6 +88,7 @@ namespace Snake
 				{
 					_items.Remove(lI);
 					CreateNewItem();
+					_score++;
 					return true;
 				}
 			}
@@ -107,7 +110,7 @@ namespace Snake
 			{
 				lGridArray[(lT.Item2) * Width + lT.Item1] = -1;
 			}
-			Random lRand = new Random();
+
 			for (int i = 0; i < lGridArray.Length; i++)
 			{
 				int r = i + (int)(lRand.NextDouble() * (lGridArray.Length - i));
@@ -175,6 +178,16 @@ namespace Snake
 				return _items;
 			}
 		}
-        
-    }
+
+		public int Score
+		{
+			get { return _score; }
+		}
+
+		public string Score_String
+		{
+			get { return _score.ToString(); }
+		}
+
+	}
 }

@@ -18,7 +18,7 @@ namespace Snake
 				GameController.HandleUserInput();
 				GameController.DrawGame();
 				
-            } while (!SwinGame.WindowCloseRequested());
+            } while (!SwinGame.WindowCloseRequested() && !GameController.Quitting);
         }
         
     }
