@@ -12,6 +12,7 @@ namespace Snake
         {
 
             Grid grid = new Grid(new Tuple<int, int>(10, 10));
+			grid.CommenceGame(15);
             SnakeObject snake = new SnakeObject(5, 5);
 
             Assert.IsNotNull(grid.SnakeObj, "Where's the snake?");
