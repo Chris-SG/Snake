@@ -67,7 +67,7 @@ namespace Snake
 			switch (_state.Peek())
 			{
 				case GameState.MainMenu:
-                    if (SwinGame.KeyDown(KeyCode.SpaceKey)) 
+                    if (ButtonClicked(_playbutton)) 
 					    StartGame(); // if button is clicked then commence
                     if (ButtonClicked(_optionbutton))
                         _state.Push(GameState.Options);
@@ -162,6 +162,12 @@ namespace Snake
             _menubutton.Y = _winY - 50;
             _menubutton.Width = 200;
             _menubutton.Height = 50;
+
+            //Play button
+            _playbutton.X = _optionbutton.X;
+            _playbutton.Y = _optionbutton.Y - 50;
+            _playbutton.Width = _optionbutton.Width;
+            _playbutton.Height = _optionbutton.Height;
         }
 
         private static void DrawOptionButton()
