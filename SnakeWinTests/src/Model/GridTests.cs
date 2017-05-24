@@ -58,10 +58,26 @@ namespace Snake.Tests
             {
                 Assert.IsFalse(lItem.X == grid.SnakeObj.X && lItem.Y == grid.SnakeObj.Y, 
                     "Item placed on top of the snake");
-            
             }
             
         }
 
+        [TestMethod()]
+        public void ScoreIncreases()
+        {
+            Grid grid = new Grid(new Tuple<int, int>(1, 2));
+            grid.CommenceGame();
+
+            grid.SnakeObj.Direction = SnakeDirection.Up;
+
+            for (int i = 0; i < 15; i++)
+            {
+                grid.SnakeObj.Movement();
+            }
+
+            grid.CheckCollisions();
+
+            Assert.AreEqual(1, grid.Score);
+        }
     }
 }

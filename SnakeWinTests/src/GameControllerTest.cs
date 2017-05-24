@@ -19,11 +19,6 @@ namespace Snake
             Assert.IsTrue(grid.Items.Count > 0, "No items here");
 
             Assert.IsTrue(grid.SnakeObj.X == 5 && grid.SnakeObj.Y == 5);
-
         }
-
-        
-
-
     }
 }
