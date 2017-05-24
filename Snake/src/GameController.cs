@@ -8,11 +8,13 @@ namespace Snake
     {
 		private const int OFFSET = 50;
         private const int F_SZ_L = 72;
+        private const int F_SZ_M = 30;
         private const int F_SZ_N = 20;
         private static readonly Color BG_CLR = Color.DarkOliveGreen;
         private static readonly Color FONT_CLR = Color.Black;
         private static readonly Color S_CLR = Color.Black;
         private static readonly Font T_FONT = SwinGame.LoadFont("Fipps.otf", F_SZ_L);
+        private static readonly Font M_FONT = SwinGame.LoadFont("Minecraft.ttf", F_SZ_M);
         private static readonly Font N_FONT = SwinGame.LoadFont("Minecraft.ttf", F_SZ_N);
         private static int _winX, _winY;
 		private static int _snake_offset_x, _snake_offset_y, _snake_part_length;
@@ -56,7 +58,13 @@ namespace Snake
 				case GameState.MainMenu:
                     if (SwinGame.KeyDown(KeyCode.SpaceKey)) 
 					    StartGame(); // if button is clicked then commence
+                    if (ButtonClicked()) ;
 					break;
+
+                case GameState.Options:
+
+                    break;
+
 				case GameState.InGame:
 					if (SwinGame.KeyDown(KeyCode.DownKey))
 					{
@@ -97,14 +105,27 @@ namespace Snake
 
         }
 
-        public static void DrawMainMenu()
+        private static void DrawMainMenu()
         {
             SwinGame.ClearScreen(BG_CLR);
-            SwinGame.DrawText("SNAKE", FONT_CLR, T_FONT, _winX/4, _winY/4);
-            SwinGame.DrawText("Press SPACE key to start the game!", FONT_CLR, N_FONT, _winX/4, _winY -100);
+            SwinGame.DrawText("SNAKE", FONT_CLR, T_FONT, _winX/4, _winY/5);
+            DrawOptionButton();
+            SwinGame.DrawText("Press SPACE key to start the game!", FONT_CLR, M_FONT, _winX/7, _winY/2 + 20);
         }
 
-        public static void DrawSnake(SnakeObject s)
+        private static void DrawOptionButton()
+        {
+            Rectangle OptionButton = new Rectangle();
+            OptionButton.X = _winX / 3 + 10;
+            OptionButton.Y = _winY - (_winY / 9);
+            OptionButton.Width = 200;
+            OptionButton.Height = OptionButton.X / 4;
+           
+            SwinGame.FillRectangle(Color.Black, OptionButton);
+            SwinGame.DrawText("OPTIONS", Color.DarkGreen, M_FONT,OptionButton.X +10, OptionButton.Y + 10);
+        }
+
+        private static void DrawSnake(SnakeObject s)
         {
             foreach (var parts in s.SnakePos)
             {
@@ -156,7 +177,29 @@ namespace Snake
             SwinGame.RefreshScreen(60);
         }
 
-		public static bool Quitting
+        
+        private static bool ButtonClicked(Rectangle button)
+        {
+            bool _wasClicked = false;
+            if (SwinGame.MouseClicked(MouseButton.LeftButton))
+            {
+                if (SwinGame.PointInRect(SwinGame.MousePosition(),button))
+                {
+                    _wasClicked = true;
+                }
+                else
+                {
+                    _wasClicked = false;
+                }
+            }
+            else
+            {
+                _wasClicked = false;
+            }
+            return _wasClicked;
+        }
+
+        public static bool Quitting
 		{
 			get { return _quitting; }
 		}
