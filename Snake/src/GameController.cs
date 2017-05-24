@@ -120,7 +120,7 @@ namespace Snake
         private static void DrawMainMenu()
         {
             SwinGame.ClearScreen(BG_CLR);
-            SwinGame.DrawText("SNAKE", FONT_CLR, T_FONT, _winX / 4, _winY / 4);
+            SwinGame.DrawText("SNAKE", FONT_CLR, T_FONT, _winX / 4 + 30, _winY / 4);
             SwinGame.DrawText("[ PLAY ]", FONT_CLR, BG_CLR, H2_FONT, FontAlignment.AlignCenter, _playbutton);
             SwinGame.DrawText("[ OPTIONS ]", FONT_CLR, BG_CLR, H2_FONT, FontAlignment.AlignCenter, _menubutton);
         }
@@ -128,8 +128,8 @@ namespace Snake
         private static void InitializeButtons()
         {
             //Option button on the main menu
-            _optionbutton.X = _winX / 3 + 10;
-            _optionbutton.Y = _winY - (_winY / 9);
+            _optionbutton.X = _winX / 2 - 100;
+            _optionbutton.Y = _winY - (_winY / 8);
             _optionbutton.Width = 200;
             _optionbutton.Height = _optionbutton.X / 4;
 
@@ -165,7 +165,7 @@ namespace Snake
 
             //Play button
             _playbutton.X = _optionbutton.X;
-            _playbutton.Y = _optionbutton.Y - 50;
+            _playbutton.Y = _optionbutton.Y - 70;
             _playbutton.Width = _optionbutton.Width;
             _playbutton.Height = _optionbutton.Height;
         }
