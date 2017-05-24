@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Snake.BonusFood">
+    <Position X="14.25" Y="4.5" Width="3" />
+    <InheritanceLine Type="Snake.Item" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="13.25" Y="6.438" />
+        <Point X="13.625" Y="6.438" />
+        <Point X="13.625" Y="5.342" />
+        <Point X="14.25" Y="5.342" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>src\Model\BonusFood.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snake.Food">
+    <Position X="14.25" Y="6.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\Model\Food.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snake.Grid">
+    <Position X="6.5" Y="1.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQBAAAAAAAAIAAAEAACBABAAAAAAAABAAQAAA=</HashCode>
+      <FileName>src\Model\Grid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snake.Item">
+    <Position X="10" Y="5.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAYAA=</HashCode>
+      <FileName>src\Model\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snake.GameController">
+    <Position X="6.5" Y="5.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAABIAAAAEAEAAAIAACAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\GameController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snake.GameMain">
+    <Position X="10" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>src\GameMain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Snake.SnakeObject">
+    <Position X="2.75" Y="1.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAARAAAAAQAADCAAQQBAAAgAAAACAAAIAQAAYAA=</HashCode>
+      <FileName>src\Snake.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="SnakeDirection">
+    <Position X="2.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAI=</HashCode>
+      <FileName>src\SnakeDirection.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameState">
+    <Position X="4.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAgAAAAAAAAAAAAAAAAQAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>src\GameState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

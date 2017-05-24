@@ -10,7 +10,7 @@ namespace Snake
         private const int F_SZ_L = 72;
         private const int F_SZ_N = 20;
         private static readonly Color BG_CLR = Color.DarkOliveGreen;
-        private static readonly Color FONT_CLR = Color.White;
+        private static readonly Color FONT_CLR = Color.Black;
         private static readonly Color S_CLR = Color.Black;
         private static readonly Font T_FONT = SwinGame.LoadFont("Fipps.otf", F_SZ_L);
         private static readonly Font N_FONT = SwinGame.LoadFont("Minecraft.ttf", F_SZ_N);
@@ -127,8 +127,8 @@ namespace Snake
         public static void DrawGameOver()
         {
             SwinGame.ClearScreen(BG_CLR);
-            SwinGame.DrawText("GAME OVER :<", FONT_CLR, T_FONT, _winX - F_SZ_L*15, _winY/5);
-            SwinGame.DrawText("Click anywhere to return to the main menu", FONT_CLR, N_FONT, _winX - F_SZ_L * 15, _winY/2);
+            SwinGame.DrawText("GAME OVER", FONT_CLR, T_FONT, _winX/8, _winY/5);
+            SwinGame.DrawText("Click anywhere to return to the main menu", FONT_CLR, N_FONT, _winX/5 + 50, _winY - 100);
         }
 
         public static void DrawGame()
