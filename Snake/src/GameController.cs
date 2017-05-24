@@ -158,10 +158,10 @@ namespace Snake
             _speedminusbutton.Height = 50;
 
             //Menu button
-            _menubutton.X = _winX / 2 - 100;
-            _menubutton.Y = _winY - 50;
-            _menubutton.Width = 200;
-            _menubutton.Height = 50;
+            _menubutton.X = _optionbutton.X;
+            _menubutton.Y = _optionbutton.Y;
+            _menubutton.Width = _optionbutton.Width;
+            _menubutton.Height = _optionbutton.Height;
 
             //Play button
             _playbutton.X = _optionbutton.X;
