@@ -8,6 +8,7 @@ public enum GameState
 {
     MainMenu,
     InGame,
+    Options,
     GameOver,
     Quitting
 }

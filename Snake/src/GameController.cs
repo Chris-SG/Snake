@@ -8,6 +8,7 @@ namespace Snake
     {
         private const int OFFSET = 50;
         private const int F_SZ_L = 72;
+        private const int F_SZ_M = 30;
         private const int F_SZ_N = 20;
         private const int F_SZ_S = 18;
         private static readonly Color BG_CLR = Color.DarkOliveGreen;
@@ -23,6 +24,10 @@ namespace Snake
         private static readonly int _snake_offset_y;
         private static int _snake_part_length;
         private static readonly Stack<GameState> _state;
+        private static readonly Font M_FONT = SwinGame.LoadFont("Minecraft.ttf", F_SZ_M);
+        private static Rectangle _optionbutton, _gridplusbutton, _gridminusbutton, _speedplusbutton, _speedminusbutton, _menubutton;
+
+
 
         private static Grid _grid;
 
@@ -42,6 +47,8 @@ namespace Snake
             }
             _state = new Stack<GameState>();
             _state.Push(GameState.MainMenu);
+
+            InitializeButtons();
         }
 
         public static void StartGame()
@@ -56,31 +63,52 @@ namespace Snake
         public static void HandleUserInput()
         {
             SwinGame.ProcessEvents();
-            switch (_state.Peek())
-            {
-                case GameState.MainMenu:
-                    if (SwinGame.KeyDown(KeyCode.SpaceKey))
-                        StartGame(); // if button is clicked then commence
-                    break;
-                case GameState.InGame:
-                    if (SwinGame.KeyDown(KeyCode.DownKey))
-                        if (_grid.SnakeObj.Direction != SnakeDirection.Up)
-                            _grid.SnakeObj.Direction = SnakeDirection.Down;
-                    if (SwinGame.KeyDown(KeyCode.RightKey))
-                        if (_grid.SnakeObj.Direction != SnakeDirection.Left)
-                            _grid.SnakeObj.Direction = SnakeDirection.Right;
-                    if (SwinGame.KeyTyped(KeyCode.LeftKey))
-                        if (_grid.SnakeObj.Direction != SnakeDirection.Right)
-                            _grid.SnakeObj.Direction = SnakeDirection.Left;
-                    if (SwinGame.KeyTyped(KeyCode.UpKey))
-                        if (_grid.SnakeObj.Direction != SnakeDirection.Down)
-                            _grid.SnakeObj.Direction = SnakeDirection.Up;
-                    _grid.SnakeObj.Movement();
 
-                    if (_grid.CheckCollisions())
-                        _state.Push(GameState.GameOver);
+			switch (_state.Peek())
+			{
+				case GameState.MainMenu:
+                    if (SwinGame.KeyDown(KeyCode.SpaceKey)) 
+					    StartGame(); // if button is clicked then commence
+                    if (ButtonClicked(_optionbutton))
+                        _state.Push(GameState.Options);
+					break;
+
+                case GameState.Options:
+                    if (ButtonClicked(_menubutton))
+                        _state.Push(GameState.MainMenu);
                     break;
-                case GameState.GameOver:
+
+				case GameState.InGame:
+					if (SwinGame.KeyDown(KeyCode.DownKey))
+					{
+						if (_grid.SnakeObj.Direction != SnakeDirection.Up)
+							_grid.SnakeObj.Direction = SnakeDirection.Down;
+					}
+					if (SwinGame.KeyDown(KeyCode.RightKey))
+					{
+						if (_grid.SnakeObj.Direction != SnakeDirection.Left)
+							_grid.SnakeObj.Direction = SnakeDirection.Right;
+					}
+					if (SwinGame.KeyTyped(KeyCode.LeftKey))
+					{
+						if (_grid.SnakeObj.Direction != SnakeDirection.Right)
+							_grid.SnakeObj.Direction = SnakeDirection.Left;
+					}
+					if (SwinGame.KeyTyped(KeyCode.UpKey))
+					{
+						if (_grid.SnakeObj.Direction != SnakeDirection.Down)
+							_grid.SnakeObj.Direction = SnakeDirection.Up;
+					}
+					_grid.SnakeObj.Movement();
+
+					if (_grid.CheckCollisions())
+					{
+						_state.Push(GameState.GameOver);
+					}
+					break;
+
+				case GameState.GameOver:
+
                     if (SwinGame.MouseClicked(MouseButton.LeftButton))
                         _state.Push(GameState.MainMenu);
                     break;
@@ -90,10 +118,11 @@ namespace Snake
             }
         }
 
-        public static void DrawMainMenu()
+        private static void DrawMainMenu()
         {
             SwinGame.ClearScreen(BG_CLR);
             SwinGame.DrawText("SNAKE", FONT_CLR, T_FONT, _winX / 4, _winY / 4);
+            DrawOptionButton();
             SwinGame.DrawText("Press SPACE key to start the game!", FONT_CLR, N_FONT, _winX / 4, _winY - 100);
         }
 
@@ -106,10 +135,56 @@ namespace Snake
             SwinGame.DrawText("v", FONT_CLR, N_FONT, _winX / 8 + 45, _winY / 3 + 60);
             SwinGame.DrawText("SNAKE SPEED", FONT_CLR, H2_FONT, _winX - _winX/3 + 15, _winY / 4);
             SwinGame.DrawText("^", FONT_CLR, N_FONT, _winX - _winX / 3 + 25 + 45, _winY / 3);
-            SwinGame.DrawText("v", FONT_CLR, N_FONT, _winX - _winX / 3 + 25 + 45, _winY / 3 + 60);
+            SwinGame.DrawText("v", FONT_CLR, N_FONT, _winX - _winX / 3 + 25 + 45, _winY / 3 + 60);       
+
         }
 
-        public static void DrawSnake(SnakeObject s)
+        private static void InitializeButtons()
+        {
+            //Option button on the main menu
+            _optionbutton.X = _winX / 3 + 10;
+            _optionbutton.Y = _winY - (_winY / 9);
+            _optionbutton.Width = 200;
+            _optionbutton.Height = _optionbutton.X / 4;
+
+            //Grid size plus button
+            _gridplusbutton.X = _winX/2 + 250;
+            _gridplusbutton.Y = _winY/3 + 100;
+            _gridplusbutton.Width = 50;
+            _gridplusbutton.Height = 50;
+
+            //Grid size minus button
+            _gridminusbutton.X = _winX/2 + 50;
+            _gridminusbutton.Y = _winY / 3 + 100;
+            _gridminusbutton.Width = 50;
+            _gridminusbutton.Height = 50;
+
+            //Speed plus button
+            _speedplusbutton.X = _winX / 2 + 250;
+            _speedplusbutton.Y = _winY / 3 + 250;
+            _speedplusbutton.Width = 50;
+            _speedplusbutton.Height = 50;
+
+            //Speed minus button
+            _speedminusbutton.X = _winX / 2 + 50;
+            _speedminusbutton.Y = _winY / 3 + 250;
+            _speedminusbutton.Width = 50;
+            _speedminusbutton.Height = 50;
+
+            //Menu button
+            _menubutton.X = _winX / 2 - 100;
+            _menubutton.Y = _winY - 50;
+            _menubutton.Width = 200;
+            _menubutton.Height = 50;
+        }
+
+        private static void DrawOptionButton()
+        {           
+            SwinGame.FillRectangle(Color.Black, _optionbutton);
+            SwinGame.DrawText("OPTIONS", Color.DarkGreen, M_FONT, _optionbutton.X +10, _optionbutton.Y + 10);
+        }
+
+        private static void DrawSnake(SnakeObject s)
         {
             foreach (var parts in s.SnakePos)
             {
@@ -145,6 +220,27 @@ namespace Snake
                 _winY - 100);
         }
 
+        public static void DrawOptionsMenu()
+        {
+            SwinGame.ClearScreen(BG_CLR);
+            SwinGame.DrawText("OPTIONS", FONT_CLR, T_FONT, _winX / 5, _winY / 6);
+
+            SwinGame.FillRectangle(Color.White,_gridplusbutton);
+            SwinGame.DrawText("+", FONT_CLR, M_FONT, _gridplusbutton.X + 15, _gridplusbutton.Y + 15);
+            SwinGame.FillRectangle(Color.White, _gridminusbutton);
+            SwinGame.DrawText("-", FONT_CLR, M_FONT, _gridminusbutton.X + 15, _gridminusbutton.Y + 15);
+            SwinGame.FillRectangle(Color.White, _speedplusbutton);
+            SwinGame.DrawText("+", FONT_CLR, M_FONT, _speedplusbutton.X + 15, _speedplusbutton.Y + 15);
+            SwinGame.FillRectangle(Color.White, _speedminusbutton);
+            SwinGame.DrawText("-", FONT_CLR, M_FONT, _speedminusbutton.X + 15, _speedminusbutton.Y + 15);
+
+            SwinGame.DrawText("GRID SIZE", FONT_CLR, M_FONT, _winX / 5, _winY / 3 + 100);
+            SwinGame.DrawText("SPEED", FONT_CLR, M_FONT, _winX / 5, _winY / 3 + 250);
+
+            SwinGame.FillRectangle(Color.Black, _menubutton);
+            SwinGame.DrawText("Menu", Color.White, M_FONT, _menubutton.X + 10, _menubutton.Y + 10);
+        }
+
         public static void DrawGame()
         {
             SwinGame.ClearScreen(BG_CLR);
@@ -153,23 +249,51 @@ namespace Snake
             {
                 case GameState.MainMenu:
                     DrawMainMenu();
+					break;
+
+                case GameState.Options:
+                    DrawOptionsMenu();
                     break;
-                case GameState.InGame:
-                    DrawSnake(_grid.SnakeObj);
-                    break;
-                case GameState.GameOver:
-                    DrawOptions();
-                    // TODO change this back to DrawGameOver();
-                    break;
-                case GameState.Quitting:
-                    break;
-            }
+
+				case GameState.InGame:
+					DrawSnake(_grid.SnakeObj);
+					break;
+				case GameState.GameOver:
+                    DrawGameOver();
+					break;
+				case GameState.Quitting:
+					break;
+			}
+
 
 
             SwinGame.DrawFramerate(0, 0);
             SwinGame.RefreshScreen(60);
         }
 
+
         public static bool Quitting { get; private set; }
+        
+        private static bool ButtonClicked(Rectangle button)
+        {
+            bool _wasClicked = false;
+            if (SwinGame.MouseClicked(MouseButton.LeftButton))
+            {
+                if (SwinGame.PointInRect(SwinGame.MousePosition(),button))
+                {
+                    _wasClicked = true;
+                }
+                else
+                {
+                    _wasClicked = false;
+                }
+            }
+            else
+            {
+                _wasClicked = false;
+            }
+            return _wasClicked;
+        }       
+
     }
 }
