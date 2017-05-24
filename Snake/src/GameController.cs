@@ -7,7 +7,14 @@ namespace Snake
     public static class GameController
     {
 		private const int OFFSET = 50;
-		private static int _winX, _winY;
+        private const int F_SZ_L = 72;
+        private const int F_SZ_N = 20;
+        private static readonly Color BG_CLR = Color.DarkOliveGreen;
+        private static readonly Color FONT_CLR = Color.White;
+        private static readonly Color S_CLR = Color.Black;
+        private static readonly Font T_FONT = SwinGame.LoadFont("Fipps.otf", F_SZ_L);
+        private static readonly Font N_FONT = SwinGame.LoadFont("Minecraft.ttf", F_SZ_N);
+        private static int _winX, _winY;
 		private static int _snake_offset_x, _snake_offset_y, _snake_part_length;
         private static Stack<GameState> _state;
 
@@ -47,7 +54,8 @@ namespace Snake
 			switch (_state.Peek())
 			{
 				case GameState.MainMenu:
-					StartGame();
+                    if (SwinGame.KeyDown(KeyCode.SpaceKey)) 
+					    StartGame(); // if button is clicked then commence
 					break;
 				case GameState.InGame:
 					if (SwinGame.KeyDown(KeyCode.DownKey))
@@ -74,11 +82,13 @@ namespace Snake
 
 					if (_grid.CheckCollisions())
 					{
-						_state.Pop();
+						_state.Push(GameState.GameOver);
 					}
 					break;
 				case GameState.GameOver:
-					break;
+                    if (SwinGame.MouseClicked(MouseButton.LeftButton))
+					    _state.Push(GameState.MainMenu);
+				    break;
 				case GameState.Quitting:
 					_quitting = true;
 					break;
@@ -87,16 +97,23 @@ namespace Snake
 
         }
 
+        public static void DrawMainMenu()
+        {
+            SwinGame.ClearScreen(BG_CLR);
+            SwinGame.DrawText("SNAKE", FONT_CLR, T_FONT, _winX/4, _winY/4);
+            SwinGame.DrawText("Press SPACE key to start the game!", FONT_CLR, N_FONT, _winX/4, _winY -100);
+        }
+
         public static void DrawSnake(SnakeObject s)
         {
             foreach (var parts in s.SnakePos)
             {
-                SwinGame.FillRectangle(Color.Coral, parts.Item1 * _snake_part_length + _snake_offset_x, parts.Item2* _snake_part_length + _snake_offset_y, _snake_part_length, _snake_part_length);
-                SwinGame.DrawRectangle(Color.BlanchedAlmond, parts.Item1 * _snake_part_length + _snake_offset_x, parts.Item2 * _snake_part_length + _snake_offset_y, _snake_part_length, _snake_part_length);
+                SwinGame.FillRectangle(S_CLR, parts.Item1 * _snake_part_length + _snake_offset_x, parts.Item2* _snake_part_length + _snake_offset_y, _snake_part_length, _snake_part_length);
+                SwinGame.DrawRectangle(BG_CLR, parts.Item1 * _snake_part_length + _snake_offset_x, parts.Item2 * _snake_part_length + _snake_offset_y, _snake_part_length, _snake_part_length);
             }
 			foreach(var itm in _grid.Items)
 			{
-				SwinGame.FillRectangle(Color.GreenYellow, itm.X * _snake_part_length + _snake_offset_x, itm.Y * _snake_part_length + _snake_offset_y, _snake_part_length, _snake_part_length);
+				SwinGame.FillRectangle(S_CLR, itm.X * _snake_part_length + _snake_offset_x, itm.Y * _snake_part_length + _snake_offset_y, _snake_part_length, _snake_part_length);
 			}
 
 			SwinGame.FillRectangle(Color.Black, _snake_offset_x - _snake_part_length, _snake_offset_y - _snake_part_length, (_grid.Width+2) * _snake_part_length, _snake_part_length);
@@ -107,18 +124,27 @@ namespace Snake
 			SwinGame.DrawText(_grid.Score_String, Color.Black, (float)10, (float)(_winY - 50));
 		}
 
+        public static void DrawGameOver()
+        {
+            SwinGame.ClearScreen(BG_CLR);
+            SwinGame.DrawText("GAME OVER :<", FONT_CLR, T_FONT, _winX - F_SZ_L*15, _winY/5);
+            SwinGame.DrawText("Click anywhere to return to the main menu", FONT_CLR, N_FONT, _winX - F_SZ_L * 15, _winY/2);
+        }
+
         public static void DrawGame()
         {
-            SwinGame.ClearScreen(Color.White);
+            SwinGame.ClearScreen(BG_CLR);
 
 			switch(_state.Peek())
 			{
 				case GameState.MainMenu:
+                    DrawMainMenu();
 					break;
 				case GameState.InGame:
 					DrawSnake(_grid.SnakeObj);
 					break;
 				case GameState.GameOver:
+                    DrawGameOver();
 					break;
 				case GameState.Quitting:
 					break;
