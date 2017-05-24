@@ -214,22 +214,24 @@ namespace Snake
         public static void DrawOptionsMenu()
         {
             SwinGame.ClearScreen(BG_CLR);
-            SwinGame.DrawText("OPTIONS", FONT_CLR, T_FONT, _winX / 5, _winY / 6);
+            SwinGame.DrawText("OPTIONS", FONT_CLR, T_FONT, _winX / 5, _winY / 6 - 15);
 
             SwinGame.FillRectangle(BG_CLR,_gridplusbutton);
-            SwinGame.DrawText("+", FONT_CLR, M_FONT, _gridplusbutton.X + 15, _gridplusbutton.Y);
+            SwinGame.DrawText("GRID SIZE", FONT_CLR, M_FONT, _gridminusbutton.X/5, _gridplusbutton.Y-10);
+            SwinGame.DrawText("+", FONT_CLR, M_FONT, _gridplusbutton.X + 15, _gridplusbutton.Y - 10);
             SwinGame.FillRectangle(BG_CLR, _gridminusbutton);
-            SwinGame.DrawText("-", FONT_CLR, M_FONT, _gridminusbutton.X + 15, _gridminusbutton.Y);
-            SwinGame.FillRectangle(BG_CLR, _speedplusbutton);
-            SwinGame.DrawText("+", FONT_CLR, M_FONT, _speedplusbutton.X + 15, _speedplusbutton.Y);
-            SwinGame.FillRectangle(BG_CLR, _speedminusbutton);
-            SwinGame.DrawText("-", FONT_CLR, M_FONT, _speedminusbutton.X + 15, _speedminusbutton.Y);
+            SwinGame.DrawText("-", FONT_CLR, M_FONT, _gridminusbutton.X + 15, _gridminusbutton.Y - 10);
+            SwinGame.DrawText("0", FONT_CLR, M_FONT, _gridminusbutton.X/2 + _gridplusbutton.X/2 + _gridplusbutton.Width - F_SZ_M, _gridminusbutton.Y - 10);
 
-            SwinGame.DrawText("GRID SIZE", FONT_CLR, M_FONT, _gridminusbutton.X/5, _gridplusbutton.Y);
-            SwinGame.DrawText("SPEED", FONT_CLR, M_FONT, _speedminusbutton.X / 5, _speedplusbutton.Y);
+            SwinGame.FillRectangle(BG_CLR, _speedplusbutton);
+            SwinGame.DrawText("SPEED", FONT_CLR, M_FONT, _speedminusbutton.X / 5, _speedplusbutton.Y-10);
+            SwinGame.DrawText("+", FONT_CLR, M_FONT, _speedplusbutton.X + 15, _speedplusbutton.Y-10);
+            SwinGame.FillRectangle(BG_CLR, _speedminusbutton);
+            SwinGame.DrawText("-", FONT_CLR, M_FONT, _speedminusbutton.X + 15, _speedminusbutton.Y-10);
+            SwinGame.DrawText("0", FONT_CLR, M_FONT, _speedminusbutton.X/2 + _speedplusbutton.X/2 + _speedminusbutton.Width - F_SZ_M, _speedminusbutton.Y - 10);
+
 
             SwinGame.FillRectangle(BG_CLR, _menubutton);
-
             SwinGame.DrawText("[ MENU ]", FONT_CLR, BG_CLR, H2_FONT, FontAlignment.AlignCenter, _menubutton);
         }
 
