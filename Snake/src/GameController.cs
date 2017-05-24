@@ -9,10 +9,13 @@ namespace Snake
         private const int OFFSET = 50;
         private const int F_SZ_L = 72;
         private const int F_SZ_N = 20;
+        private const int F_SZ_S = 18;
         private static readonly Color BG_CLR = Color.DarkOliveGreen;
         private static readonly Color FONT_CLR = Color.Black;
         private static readonly Color S_CLR = Color.Black;
         private static readonly Font T_FONT = SwinGame.LoadFont("Fipps.otf", F_SZ_L);
+        private static readonly Font H1_FONT = SwinGame.LoadFont("Fipps.otf", F_SZ_N);
+        private static readonly Font H2_FONT = SwinGame.LoadFont("Minecraft.ttf", F_SZ_S);
         private static readonly Font N_FONT = SwinGame.LoadFont("Minecraft.ttf", F_SZ_N);
         private static readonly int _winX;
         private static readonly int _winY;
@@ -94,6 +97,18 @@ namespace Snake
             SwinGame.DrawText("Press SPACE key to start the game!", FONT_CLR, N_FONT, _winX / 4, _winY - 100);
         }
 
+        public static void DrawOptions()
+        { 
+            SwinGame.ClearScreen(BG_CLR);
+            SwinGame.DrawText("SNAKE", FONT_CLR, H1_FONT, _winX/2 - F_SZ_N*3, _winY/10);
+            SwinGame.DrawText("GRID SIZE", FONT_CLR, H2_FONT, _winX/8 + 15, _winY/4);
+            SwinGame.DrawText("^", FONT_CLR, N_FONT, _winX/8 + 45, _winY/3);
+            SwinGame.DrawText("v", FONT_CLR, N_FONT, _winX / 8 + 45, _winY / 3 + 60);
+            SwinGame.DrawText("SNAKE SPEED", FONT_CLR, H2_FONT, _winX - _winX/3 + 15, _winY / 4);
+            SwinGame.DrawText("^", FONT_CLR, N_FONT, _winX - _winX / 3 + 25 + 45, _winY / 3);
+            SwinGame.DrawText("v", FONT_CLR, N_FONT, _winX - _winX / 3 + 25 + 45, _winY / 3 + 60);
+        }
+
         public static void DrawSnake(SnakeObject s)
         {
             foreach (var parts in s.SnakePos)
@@ -143,7 +158,8 @@ namespace Snake
                     DrawSnake(_grid.SnakeObj);
                     break;
                 case GameState.GameOver:
-                    DrawGameOver();
+                    DrawOptions();
+                    // TODO change this back to DrawGameOver();
                     break;
                 case GameState.Quitting:
                     break;
