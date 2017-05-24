@@ -16,7 +16,7 @@ namespace Snake
         private static readonly Color S_CLR = Color.Black;
         private static readonly Font T_FONT = SwinGame.LoadFont("Fipps.otf", F_SZ_L);
         private static readonly Font H1_FONT = SwinGame.LoadFont("Fipps.otf", F_SZ_N);
-        private static readonly Font H2_FONT = SwinGame.LoadFont("Minecraft.ttf", F_SZ_S);
+        private static readonly Font H2_FONT = SwinGame.LoadFont("Minecraft.ttf", F_SZ_M);
         private static readonly Font N_FONT = SwinGame.LoadFont("Minecraft.ttf", F_SZ_N);
         private static readonly int _winX;
         private static readonly int _winY;
@@ -25,7 +25,7 @@ namespace Snake
         private static int _snake_part_length;
         private static readonly Stack<GameState> _state;
         private static readonly Font M_FONT = SwinGame.LoadFont("Minecraft.ttf", F_SZ_M);
-        private static Rectangle _optionbutton, _gridplusbutton, _gridminusbutton, _speedplusbutton, _speedminusbutton, _menubutton;
+        private static Rectangle _optionbutton, _gridplusbutton, _gridminusbutton, _speedplusbutton, _speedminusbutton, _menubutton, _playbutton;
 
 
 
@@ -108,7 +108,6 @@ namespace Snake
 					break;
 
 				case GameState.GameOver:
-
                     if (SwinGame.MouseClicked(MouseButton.LeftButton))
                         _state.Push(GameState.MainMenu);
                     break;
@@ -122,21 +121,8 @@ namespace Snake
         {
             SwinGame.ClearScreen(BG_CLR);
             SwinGame.DrawText("SNAKE", FONT_CLR, T_FONT, _winX / 4, _winY / 4);
-            DrawOptionButton();
-            SwinGame.DrawText("Press SPACE key to start the game!", FONT_CLR, N_FONT, _winX / 4, _winY - 100);
-        }
-
-        public static void DrawOptions()
-        { 
-            SwinGame.ClearScreen(BG_CLR);
-            SwinGame.DrawText("SNAKE", FONT_CLR, H1_FONT, _winX/2 - F_SZ_N*3, _winY/10);
-            SwinGame.DrawText("GRID SIZE", FONT_CLR, H2_FONT, _winX/8 + 15, _winY/4);
-            SwinGame.DrawText("^", FONT_CLR, N_FONT, _winX/8 + 45, _winY/3);
-            SwinGame.DrawText("v", FONT_CLR, N_FONT, _winX / 8 + 45, _winY / 3 + 60);
-            SwinGame.DrawText("SNAKE SPEED", FONT_CLR, H2_FONT, _winX - _winX/3 + 15, _winY / 4);
-            SwinGame.DrawText("^", FONT_CLR, N_FONT, _winX - _winX / 3 + 25 + 45, _winY / 3);
-            SwinGame.DrawText("v", FONT_CLR, N_FONT, _winX - _winX / 3 + 25 + 45, _winY / 3 + 60);       
-
+            SwinGame.DrawText("[ PLAY ]", FONT_CLR, BG_CLR, H2_FONT, FontAlignment.AlignCenter, _playbutton);
+            SwinGame.DrawText("[ OPTIONS ]", FONT_CLR, BG_CLR, H2_FONT, FontAlignment.AlignCenter, _menubutton);
         }
 
         private static void InitializeButtons()
@@ -179,9 +165,8 @@ namespace Snake
         }
 
         private static void DrawOptionButton()
-        {           
-            SwinGame.FillRectangle(Color.Black, _optionbutton);
-            SwinGame.DrawText("OPTIONS", Color.DarkGreen, M_FONT, _optionbutton.X +10, _optionbutton.Y + 10);
+        {   
+           
         }
 
         private static void DrawSnake(SnakeObject s)
@@ -225,20 +210,21 @@ namespace Snake
             SwinGame.ClearScreen(BG_CLR);
             SwinGame.DrawText("OPTIONS", FONT_CLR, T_FONT, _winX / 5, _winY / 6);
 
-            SwinGame.FillRectangle(Color.White,_gridplusbutton);
-            SwinGame.DrawText("+", FONT_CLR, M_FONT, _gridplusbutton.X + 15, _gridplusbutton.Y + 15);
-            SwinGame.FillRectangle(Color.White, _gridminusbutton);
-            SwinGame.DrawText("-", FONT_CLR, M_FONT, _gridminusbutton.X + 15, _gridminusbutton.Y + 15);
-            SwinGame.FillRectangle(Color.White, _speedplusbutton);
-            SwinGame.DrawText("+", FONT_CLR, M_FONT, _speedplusbutton.X + 15, _speedplusbutton.Y + 15);
-            SwinGame.FillRectangle(Color.White, _speedminusbutton);
-            SwinGame.DrawText("-", FONT_CLR, M_FONT, _speedminusbutton.X + 15, _speedminusbutton.Y + 15);
+            SwinGame.FillRectangle(BG_CLR,_gridplusbutton);
+            SwinGame.DrawText("+", FONT_CLR, M_FONT, _gridplusbutton.X + 15, _gridplusbutton.Y);
+            SwinGame.FillRectangle(BG_CLR, _gridminusbutton);
+            SwinGame.DrawText("-", FONT_CLR, M_FONT, _gridminusbutton.X + 15, _gridminusbutton.Y);
+            SwinGame.FillRectangle(BG_CLR, _speedplusbutton);
+            SwinGame.DrawText("+", FONT_CLR, M_FONT, _speedplusbutton.X + 15, _speedplusbutton.Y);
+            SwinGame.FillRectangle(BG_CLR, _speedminusbutton);
+            SwinGame.DrawText("-", FONT_CLR, M_FONT, _speedminusbutton.X + 15, _speedminusbutton.Y);
 
-            SwinGame.DrawText("GRID SIZE", FONT_CLR, M_FONT, _winX / 5, _winY / 3 + 100);
-            SwinGame.DrawText("SPEED", FONT_CLR, M_FONT, _winX / 5, _winY / 3 + 250);
+            SwinGame.DrawText("GRID SIZE", FONT_CLR, M_FONT, _gridminusbutton.X/5, _gridplusbutton.Y);
+            SwinGame.DrawText("SPEED", FONT_CLR, M_FONT, _speedminusbutton.X / 5, _speedplusbutton.Y);
 
-            SwinGame.FillRectangle(Color.Black, _menubutton);
-            SwinGame.DrawText("Menu", Color.White, M_FONT, _menubutton.X + 10, _menubutton.Y + 10);
+            SwinGame.FillRectangle(BG_CLR, _menubutton);
+
+            SwinGame.DrawText("[ MENU ]", FONT_CLR, BG_CLR, H2_FONT, FontAlignment.AlignCenter, _menubutton);
         }
 
         public static void DrawGame()
