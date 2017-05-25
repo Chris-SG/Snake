@@ -11,8 +11,14 @@ namespace Snake
             _position = new Tuple<int, int>(x, y);
         }
 
-        public int X => _position.Item1;
+        public int X
+        {
+            get { return _position.Item1; }
+        }
 
-        public int Y => _position.Item2;
+        public int Y
+        {
+            get { return _position.Item2; }
+        }
     }
 }

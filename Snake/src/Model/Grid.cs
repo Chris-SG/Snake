@@ -33,18 +33,27 @@ namespace Snake
         /// <summary>
         ///     Width of the grid.
         /// </summary>
-        public int Width => Convert.ToInt32(_gridSize.Item1);
+        public int Width
+        {
+            get { return Convert.ToInt32(_gridSize.Item1); }
+        }
 
         /// <summary>
         ///     Height of the grid.
         /// </summary>
-        public int Height => Convert.ToInt32(_gridSize.Item2);
+        public int Height
+        {
+            get { return Convert.ToInt32(_gridSize.Item2); }
+        }
 
         public List<Item> Items { get; }
 
         public int Score { get; private set; }
 
-        public string Score_String => Score.ToString();
+        public string Score_String
+        {
+            get { return Score.ToString(); }
+        }
 
         /// <summary>
         ///     Run collision tests to grow snake and determine whether
