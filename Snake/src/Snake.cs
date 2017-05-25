@@ -1,127 +1,114 @@
 ﻿using System;
 using System.Collections.Generic;
-using SwinGameSDK;
 
 namespace Snake
 {
-	public class SnakeObject
-	{
-		private Tuple<int, int> _snakePos;
-		private SnakeDirection _direction, _directionToMove;
-		private int _lives;
-		private int _moveCounter;
-		private bool _grow;
-		private List<Tuple<int, int>> _movementQueue;
-		private bool _isSnakeNew;
-		private int _speed;
+    public class SnakeObject
+    {
+        private SnakeDirection _direction, _directionToMove;
+        private bool _grow;
+        private int _moveCounter;
+        private Tuple<int, int> _snakePos;
+        private readonly int _speed;
 
-		public SnakeObject(Tuple<int,int> aGridSize, int aSpeed = 15)
-		{
-			_snakePos = new Tuple<int, int>((aGridSize.Item1 / 2), (aGridSize.Item2 / 2));
-			_speed = aSpeed;
-			Initialize();
-		}
-		
-		public SnakeObject(int x, int y, int aSpeed = 15)
-		{
-			_snakePos = new Tuple<int, int>((x/2), (y/2));
-			_speed = aSpeed;
-			Initialize();
-		}
+        public SnakeObject(Tuple<int, int> aGridSize, int aSpeed = 15)
+        {
+            _snakePos = new Tuple<int, int>(aGridSize.Item1 / 2, aGridSize.Item2 / 2);
+            _speed = aSpeed;
+            Initialize();
+        }
 
-		private void Initialize()
-		{
-			_movementQueue = new List<Tuple<int, int>>();
+        public SnakeObject(int x, int y, int aSpeed = 15)
+        {
+            _snakePos = new Tuple<int, int>(x / 2, y / 2);
+            _speed = aSpeed;
+            Initialize();
+        }
 
-			for (int i = 0; i < 3; i++)
-			{
-				_movementQueue.Add(_snakePos);
-			}
-			_directionToMove = SnakeDirection.Right;
-			_direction = _directionToMove;
-			_grow = false;
+        public int X
+        {
+            get { return _snakePos.Item1; }
+        }
 
-			_moveCounter = _speed;
+        public bool Grow
+        {
+            set { _grow = value; }
+        }
 
-			_isSnakeNew = true;
-		}
+        public int Y
+        {
+            get { return _snakePos.Item2; }
+        }
 
-		public int X {
-			get { return _snakePos.Item1; }
-		}
+        public SnakeDirection Direction
+        {
+            get { return _direction; }
+            set { _directionToMove = value; }
+        }
 
-		public bool Grow
-		{
-			set { _grow = value; }
-		}
+        public int Length
+        {
+            get { return SnakePos.Count; }
+        }
 
-		public int Y {
-			get { return _snakePos.Item2; ; }
-		}
+        public List<Tuple<int, int>> SnakePos { get; private set; }
 
-		public SnakeDirection Direction {
-			get { return _direction; }
-			set { _directionToMove = value; }
-		}
+        public int Lives { get; set; }
 
-		public int Length {
-			get { return _movementQueue.Count; }
-		}
+        public bool IsSnakeNew { get; private set; }
 
-		public List<Tuple<int, int>> SnakePos
-		{
-			get { return _movementQueue; }
-		}
+        private void Initialize()
+        {
+            SnakePos = new List<Tuple<int, int>>();
 
-		public int Lives {
-			get { return _lives; }
-			set { _lives = value; }
-		}
+            for (var i = 0; i < 3; i++)
+                SnakePos.Add(_snakePos);
+            _directionToMove = SnakeDirection.Right;
+            _direction = _directionToMove;
+            _grow = false;
 
-		public bool IsSnakeNew
-		{
-			get { return _isSnakeNew; }
-		}
+            _moveCounter = _speed;
 
-		public void Movement ()
-		{
-			if(--_moveCounter == 0)
-			{
-				_isSnakeNew = false;
-				_moveCounter = _speed;
-			    _direction = _directionToMove;
+            IsSnakeNew = true;
+        }
+
+        public void Movement()
+        {
+            if (--_moveCounter == 0)
+            {
+                IsSnakeNew = false;
+                _moveCounter = _speed;
+                _direction = _directionToMove;
 
                 //TODO: Maybe set a snake part length 50 to make it move faster
                 switch (Direction)
-				{
-					case SnakeDirection.Up:
-						//negative y
-						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2-1);
-						_movementQueue.Add(_snakePos);
-						break;
-					case SnakeDirection.Right:
-						//positive x
-						_snakePos = new Tuple<int, int>(_snakePos.Item1+1, _snakePos.Item2);
-						_movementQueue.Add(_snakePos);
-						break;
-					case SnakeDirection.Down:
-						//positive y
-						_snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2+1);
-						_movementQueue.Add(_snakePos);
-						break;
-					case SnakeDirection.Left:
-						//negative x
-						_snakePos = new Tuple<int, int>(_snakePos.Item1-1, _snakePos.Item2);
-						_movementQueue.Add(_snakePos);
-						break;
-				}
+                {
+                    case SnakeDirection.Up:
+                        //negative y
+                        _snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2 - 1);
+                        SnakePos.Add(_snakePos);
+                        break;
+                    case SnakeDirection.Right:
+                        //positive x
+                        _snakePos = new Tuple<int, int>(_snakePos.Item1 + 1, _snakePos.Item2);
+                        SnakePos.Add(_snakePos);
+                        break;
+                    case SnakeDirection.Down:
+                        //positive y
+                        _snakePos = new Tuple<int, int>(_snakePos.Item1, _snakePos.Item2 + 1);
+                        SnakePos.Add(_snakePos);
+                        break;
+                    case SnakeDirection.Left:
+                        //negative x
+                        _snakePos = new Tuple<int, int>(_snakePos.Item1 - 1, _snakePos.Item2);
+                        SnakePos.Add(_snakePos);
+                        break;
+                }
 
-				if (_grow != true)
-				{
-					_movementQueue.RemoveAt(0);
-				}
-				_grow = false;
-			}
-		}
-	}
+                if (_grow != true)
+                    SnakePos.RemoveAt(0);
+                _grow = false;
+            }
+        }
+    }
 }
