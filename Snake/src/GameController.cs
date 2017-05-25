@@ -170,11 +170,6 @@ namespace Snake
             _playbutton.Height = _optionbutton.Height;
         }
 
-        private static void DrawOptionButton()
-        {   
-           
-        }
-
         private static void DrawSnake(SnakeObject s)
         {
             foreach (var parts in s.SnakePos)
