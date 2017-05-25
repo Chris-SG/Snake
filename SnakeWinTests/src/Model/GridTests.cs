@@ -1,67 +1,56 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Snake;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Snake.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class GridTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void GridSizeTest()
         {
-            Grid grid = new Grid(new Tuple<int, int>(10, 10));
+            var grid = new Grid(new Tuple<int, int>(10, 10));
 
             Assert.AreEqual(grid.Height, 10);
             Assert.AreEqual(grid.Width, 10);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GridHasSnakeTest()
         {
-            Grid grid = new Grid(new Tuple<int, int>(10, 10));
+            var grid = new Grid(new Tuple<int, int>(10, 10));
             grid.CommenceGame();
-            
-            Assert.IsTrue(grid.SnakeObj.X == 5 && grid.SnakeObj.Y == 5);            
+
+            Assert.IsTrue(grid.SnakeObj.X == 5 && grid.SnakeObj.Y == 5);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GridFullTest()
         {
-            Grid grid = new Grid(new Tuple<int, int>(1, 1));
+            var grid = new Grid(new Tuple<int, int>(1, 1));
             grid.CommenceGame();
 
             Assert.IsTrue(grid.SnakeObj.X == 0 && grid.SnakeObj.Y == 0);
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GridItemDeploymentTest()
         {
-            Grid grid = new Grid(new Tuple<int, int>(10, 10));
+            var grid = new Grid(new Tuple<int, int>(10, 10));
             grid.CommenceGame();
 
             Assert.IsTrue(grid.Items.Count > 0, "No items created");
-        
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void GridItemDeploymentClashTest()
         {
-            Grid grid = new Grid(new Tuple<int, int>(10, 10));
+            var grid = new Grid(new Tuple<int, int>(10, 10));
             grid.CommenceGame();
 
-            foreach (Item lItem in grid.Items)
-            {
-                Assert.IsFalse(lItem.X == grid.SnakeObj.X && lItem.Y == grid.SnakeObj.Y, 
+            foreach (var lItem in grid.Items)
+                Assert.IsFalse(lItem.X == grid.SnakeObj.X && lItem.Y == grid.SnakeObj.Y,
                     "Item placed on top of the snake");
-            
-            }
-            
         }
-
     }
 }

@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using SwinGameSDK;
 
 namespace Snake
@@ -10,16 +8,14 @@ namespace Snake
         {
             //Open the game window
             SwinGame.OpenGraphicsWindow("Snake", 800, 600);
-			//SwinGame.ShowSwinGameSplashScreen();
+            //SwinGame.ShowSwinGameSplashScreen();
             //GameController.StartGame();
             //Run the game loop
             do
             {
-				GameController.HandleUserInput();
-				GameController.DrawGame();
-				
+                GameController.HandleUserInput();
+                GameController.DrawGame();
             } while (!SwinGame.WindowCloseRequested() && !GameController.Quitting);
         }
-        
     }
 }

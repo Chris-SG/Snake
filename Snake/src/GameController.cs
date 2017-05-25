@@ -25,10 +25,17 @@ namespace Snake
         private static int _snake_part_length;
         private static readonly Stack<GameState> _state;
         private static readonly Font M_FONT = SwinGame.LoadFont("Minecraft.ttf", F_SZ_M);
-        private static Rectangle _optionbutton, _gridplusbutton, _gridminusbutton, _speedplusbutton, _speedminusbutton, _menubutton, _playbutton;
-		private static int _gridSize;
-		private static int _speed;
 
+        private static Rectangle _optionbutton,
+            _gridplusbutton,
+            _gridminusbutton,
+            _speedplusbutton,
+            _speedminusbutton,
+            _menubutton,
+            _playbutton;
+
+        private static int _gridSize;
+        private static int _speed;
 
 
         private static Grid _grid;
@@ -48,12 +55,15 @@ namespace Snake
                 _snake_offset_y = (_winY - _winX) / 2 + OFFSET;
             }
             _state = new Stack<GameState>();
-			_gridSize = 12;
-			_speed = 4;
+            _gridSize = 12;
+            _speed = 4;
             _state.Push(GameState.MainMenu);
 
             InitializeButtons();
         }
+
+
+        public static bool Quitting { get; private set; }
 
         public static void StartGame()
         {
@@ -61,75 +71,55 @@ namespace Snake
             var lGrid = new Tuple<int, int>(_gridSize, _gridSize);
             _snake_part_length = (_winX - 2 * _snake_offset_x) / lGrid.Item1;
             _grid = new Grid(lGrid);
-            _grid.CommenceGame(55-(_speed*5));
+            _grid.CommenceGame(55 - _speed * 5);
         }
 
         public static void HandleUserInput()
         {
             SwinGame.ProcessEvents();
 
-			switch (_state.Peek())
-			{
-				case GameState.MainMenu:
-                    if (ButtonClicked(_playbutton)) 
-					    StartGame(); // if button is clicked then commence
+            switch (_state.Peek())
+            {
+                case GameState.MainMenu:
+                    if (ButtonClicked(_playbutton))
+                        StartGame(); // if button is clicked then commence
                     if (ButtonClicked(_optionbutton))
                         _state.Push(GameState.Options);
-					break;
-
-                case GameState.Options:
-					if (ButtonClicked(_menubutton))
-					{
-						_state.Pop();
-					}
-					if(ButtonClicked(_gridplusbutton))
-					{
-						_gridSize = ClampValue(_gridSize + 1, 1, 24);
-					}
-					if(ButtonClicked(_gridminusbutton))
-					{
-						_gridSize = ClampValue(_gridSize - 1, 1, 24);
-					}
-					if(ButtonClicked(_speedplusbutton))
-					{
-						_speed = ClampValue(_speed + 1, 1, 10);
-					}
-					if(ButtonClicked(_speedminusbutton))
-					{
-						_speed = ClampValue(_speed - 1, 1, 10);
-					}
                     break;
 
-				case GameState.InGame:
-					if (SwinGame.KeyDown(KeyCode.DownKey))
-					{
-						if (_grid.SnakeObj.Direction != SnakeDirection.Up)
-							_grid.SnakeObj.Direction = SnakeDirection.Down;
-					}
-					if (SwinGame.KeyDown(KeyCode.RightKey))
-					{
-						if (_grid.SnakeObj.Direction != SnakeDirection.Left)
-							_grid.SnakeObj.Direction = SnakeDirection.Right;
-					}
-					if (SwinGame.KeyTyped(KeyCode.LeftKey))
-					{
-						if (_grid.SnakeObj.Direction != SnakeDirection.Right)
-							_grid.SnakeObj.Direction = SnakeDirection.Left;
-					}
-					if (SwinGame.KeyTyped(KeyCode.UpKey))
-					{
-						if (_grid.SnakeObj.Direction != SnakeDirection.Down)
-							_grid.SnakeObj.Direction = SnakeDirection.Up;
-					}
-					_grid.SnakeObj.Movement();
+                case GameState.Options:
+                    if (ButtonClicked(_menubutton))
+                        _state.Pop();
+                    if (ButtonClicked(_gridplusbutton))
+                        _gridSize = ClampValue(_gridSize + 1, 1, 24);
+                    if (ButtonClicked(_gridminusbutton))
+                        _gridSize = ClampValue(_gridSize - 1, 1, 24);
+                    if (ButtonClicked(_speedplusbutton))
+                        _speed = ClampValue(_speed + 1, 1, 10);
+                    if (ButtonClicked(_speedminusbutton))
+                        _speed = ClampValue(_speed - 1, 1, 10);
+                    break;
 
-					if (_grid.CheckCollisions())
-					{
-						_state.Push(GameState.GameOver);
-					}
-					break;
+                case GameState.InGame:
+                    if (SwinGame.KeyDown(KeyCode.DownKey))
+                        if (_grid.SnakeObj.Direction != SnakeDirection.Up)
+                            _grid.SnakeObj.Direction = SnakeDirection.Down;
+                    if (SwinGame.KeyDown(KeyCode.RightKey))
+                        if (_grid.SnakeObj.Direction != SnakeDirection.Left)
+                            _grid.SnakeObj.Direction = SnakeDirection.Right;
+                    if (SwinGame.KeyTyped(KeyCode.LeftKey))
+                        if (_grid.SnakeObj.Direction != SnakeDirection.Right)
+                            _grid.SnakeObj.Direction = SnakeDirection.Left;
+                    if (SwinGame.KeyTyped(KeyCode.UpKey))
+                        if (_grid.SnakeObj.Direction != SnakeDirection.Down)
+                            _grid.SnakeObj.Direction = SnakeDirection.Up;
+                    _grid.SnakeObj.Movement();
 
-				case GameState.GameOver:
+                    if (_grid.CheckCollisions())
+                        _state.Push(GameState.GameOver);
+                    break;
+
+                case GameState.GameOver:
                     if (SwinGame.MouseClicked(MouseButton.LeftButton))
                         _state.Push(GameState.MainMenu);
                     break;
@@ -139,18 +129,14 @@ namespace Snake
             }
         }
 
-		private static int ClampValue(int val, int min, int max)
-		{
-			if(val > max)
-			{
-				return max;
-			}
-			else if(val < min)
-			{
-				return min;
-			}
-			return val;
-		}
+        private static int ClampValue(int val, int min, int max)
+        {
+            if (val > max)
+                return max;
+            if (val < min)
+                return min;
+            return val;
+        }
 
         private static void DrawMainMenu()
         {
@@ -164,18 +150,18 @@ namespace Snake
         {
             //Option button on the main menu
             _optionbutton.X = _winX / 2 - 100;
-            _optionbutton.Y = _winY - (_winY / 8);
+            _optionbutton.Y = _winY - _winY / 8;
             _optionbutton.Width = 200;
             _optionbutton.Height = _optionbutton.X / 4;
 
             //Grid size plus button
-            _gridplusbutton.X = _winX/2 + 250;
-            _gridplusbutton.Y = _winY/3 + 100;
+            _gridplusbutton.X = _winX / 2 + 250;
+            _gridplusbutton.Y = _winY / 3 + 100;
             _gridplusbutton.Width = 50;
             _gridplusbutton.Height = 50;
 
             //Grid size minus button
-            _gridminusbutton.X = _winX/2 + 50;
+            _gridminusbutton.X = _winX / 2 + 50;
             _gridminusbutton.Y = _winY / 3 + 100;
             _gridminusbutton.Width = 50;
             _gridminusbutton.Height = 50;
@@ -234,10 +220,10 @@ namespace Snake
         public static void DrawGameOver()
         {
             SwinGame.ClearScreen(BG_CLR);
-            SwinGame.DrawText("GAME OVER", FONT_CLR, T_FONT, _winX / 8, _winY / 5);
+            SwinGame.DrawText("GAME OVER", FONT_CLR, T_FONT, _winX / 10, _winY / 5);
             SwinGame.DrawText(string.Format("Your score: {0}", _grid.Score_String), FONT_CLR, N_FONT,
                 _winX / 2 - F_SZ_N * 3, _winY / 2);
-            SwinGame.DrawText("Click anywhere to return to the main menu", FONT_CLR, N_FONT, _winX / 5 + 50,
+            SwinGame.DrawText("Click anywhere to return to the main menu", FONT_CLR, N_FONT, _winX / 2 - F_SZ_S * 11,
                 _winY - 100);
         }
 
@@ -246,19 +232,23 @@ namespace Snake
             SwinGame.ClearScreen(BG_CLR);
             SwinGame.DrawText("OPTIONS", FONT_CLR, T_FONT, _winX / 5, _winY / 6 - 15);
 
-            SwinGame.FillRectangle(BG_CLR,_gridplusbutton);
-            SwinGame.DrawText("GRID SIZE", FONT_CLR, M_FONT, _gridminusbutton.X/5, _gridplusbutton.Y-10);
+            SwinGame.FillRectangle(BG_CLR, _gridplusbutton);
+            SwinGame.DrawText("GRID SIZE", FONT_CLR, M_FONT, _gridminusbutton.X / 5, _gridplusbutton.Y - 10);
             SwinGame.DrawText("+", FONT_CLR, M_FONT, _gridplusbutton.X + 15, _gridplusbutton.Y - 10);
             SwinGame.FillRectangle(BG_CLR, _gridminusbutton);
             SwinGame.DrawText("-", FONT_CLR, M_FONT, _gridminusbutton.X + 15, _gridminusbutton.Y - 10);
-            SwinGame.DrawText(_gridSize.ToString(), FONT_CLR, M_FONT, _gridminusbutton.X/2 + _gridplusbutton.X/2 + _gridplusbutton.Width - F_SZ_M, _gridminusbutton.Y - 10);
+            SwinGame.DrawText(_gridSize.ToString(), FONT_CLR, M_FONT,
+                _gridminusbutton.X / 2 + _gridplusbutton.X / 2 + _gridplusbutton.Width - F_SZ_M,
+                _gridminusbutton.Y - 10);
 
             SwinGame.FillRectangle(BG_CLR, _speedplusbutton);
-            SwinGame.DrawText("SPEED", FONT_CLR, M_FONT, _speedminusbutton.X / 5, _speedplusbutton.Y-10);
-            SwinGame.DrawText("+", FONT_CLR, M_FONT, _speedplusbutton.X + 15, _speedplusbutton.Y-10);
+            SwinGame.DrawText("SPEED", FONT_CLR, M_FONT, _speedminusbutton.X / 5, _speedplusbutton.Y - 10);
+            SwinGame.DrawText("+", FONT_CLR, M_FONT, _speedplusbutton.X + 15, _speedplusbutton.Y - 10);
             SwinGame.FillRectangle(BG_CLR, _speedminusbutton);
-            SwinGame.DrawText("-", FONT_CLR, M_FONT, _speedminusbutton.X + 15, _speedminusbutton.Y-10);
-            SwinGame.DrawText(_speed.ToString(), FONT_CLR, M_FONT, _speedminusbutton.X/2 + _speedplusbutton.X/2 + _speedminusbutton.Width - F_SZ_M, _speedminusbutton.Y - 10);
+            SwinGame.DrawText("-", FONT_CLR, M_FONT, _speedminusbutton.X + 15, _speedminusbutton.Y - 10);
+            SwinGame.DrawText(_speed.ToString(), FONT_CLR, M_FONT,
+                _speedminusbutton.X / 2 + _speedplusbutton.X / 2 + _speedminusbutton.Width - F_SZ_M,
+                _speedminusbutton.Y - 10);
 
 
             SwinGame.FillRectangle(BG_CLR, _menubutton);
@@ -273,51 +263,38 @@ namespace Snake
             {
                 case GameState.MainMenu:
                     DrawMainMenu();
-					break;
+                    break;
 
                 case GameState.Options:
                     DrawOptionsMenu();
                     break;
 
-				case GameState.InGame:
-					DrawSnake(_grid.SnakeObj);
-					break;
-				case GameState.GameOver:
+                case GameState.InGame:
+                    DrawSnake(_grid.SnakeObj);
+                    break;
+                case GameState.GameOver:
                     DrawGameOver();
-					break;
-				case GameState.Quitting:
-					break;
-			}
-
+                    break;
+                case GameState.Quitting:
+                    break;
+            }
 
 
             SwinGame.DrawFramerate(0, 0);
             SwinGame.RefreshScreen(60);
         }
 
-
-        public static bool Quitting { get; private set; }
-        
         private static bool ButtonClicked(Rectangle button)
         {
-            bool _wasClicked = false;
+            var _wasClicked = false;
             if (SwinGame.MouseClicked(MouseButton.LeftButton))
-            {
-                if (SwinGame.PointInRect(SwinGame.MousePosition(),button))
-                {
+                if (SwinGame.PointInRect(SwinGame.MousePosition(), button))
                     _wasClicked = true;
-                }
                 else
-                {
                     _wasClicked = false;
-                }
-            }
             else
-            {
                 _wasClicked = false;
-            }
             return _wasClicked;
-        }       
-
+        }
     }
 }
