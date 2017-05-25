@@ -25,22 +25,31 @@ namespace Snake
             Initialize();
         }
 
-        public int X => _snakePos.Item1;
+        public int X
+        {
+            get { return _snakePos.Item1; }
+        }
 
         public bool Grow
         {
-            set => _grow = value;
+            set { _grow = value; }
         }
 
-        public int Y => _snakePos.Item2;
+        public int Y
+        {
+            get { return _snakePos.Item2; }
+        }
 
         public SnakeDirection Direction
         {
-            get => _direction;
-            set => _directionToMove = value;
+            get { return _direction; }
+            set { _directionToMove = value; }
         }
 
-        public int Length => SnakePos.Count;
+        public int Length
+        {
+            get { return SnakePos.Count; }
+        }
 
         public List<Tuple<int, int>> SnakePos { get; private set; }
 
