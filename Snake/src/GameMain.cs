@@ -8,7 +8,7 @@ namespace Snake
         {
             //Open the game window
             SwinGame.OpenGraphicsWindow("Snake", 800, 600);
-            //SwinGame.ShowSwinGameSplashScreen();
+            SwinGame.ShowSwinGameSplashScreen();
             //GameController.StartGame();
             //Run the game loop
             do
