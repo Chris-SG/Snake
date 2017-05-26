@@ -115,13 +115,16 @@ namespace Snake
                             _grid.SnakeObj.Direction = SnakeDirection.Up;
                     _grid.SnakeObj.Movement();
 
-                    if (_grid.CheckCollisions())
-                        _state.Push(GameState.GameOver);
+					if (_grid.CheckCollisions())
+					{
+						_state.Pop();
+						_state.Push(GameState.GameOver);
+					}
                     break;
 
                 case GameState.GameOver:
                     if (SwinGame.MouseClicked(MouseButton.LeftButton))
-                        _state.Push(GameState.MainMenu);
+                        _state.Pop();
                     break;
                 case GameState.Quitting:
                     Quitting = true;
