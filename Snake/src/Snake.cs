@@ -63,7 +63,7 @@ namespace Snake
 
             for (var i = 0; i < 3; i++)
                 SnakePos.Add(_snakePos);
-            _directionToMove = SnakeDirection.Right;
+            _directionToMove = SnakeDirection.Left;
             _direction = _directionToMove;
             _grow = false;
 
